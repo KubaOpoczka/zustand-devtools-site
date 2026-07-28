@@ -2,8 +2,8 @@
 
 An interactive product site for a Chrome DevTools extension that turns Zustand state changes into inspectable debugging sessions.
 
-[Open the live site](https://smellybricc.github.io/zustand-devtools-site/) ·
-[Inspect the extension source](https://github.com/SmellyBricc/zustand-devtools)
+[Open the live site](https://kubaopoczka.github.io/zustand-devtools-site/) ·
+[Inspect the extension source](https://github.com/KubaOpoczka/zustand-devtools)
 
 ![Zustand DevTools Trace Sessions](./og.png)
 
