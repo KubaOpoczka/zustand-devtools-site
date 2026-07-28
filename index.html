@@ -108,37 +108,21 @@
     header nav a.gh-link { display: none; }
   }
 
-  /* ---------- Trace rail: the page as one continuous trace ---------- */
-  @media (min-width: 1240px) {
-    main { position: relative; }
-    main::before {
-      content: ""; position: absolute; top: 0; bottom: 0; left: -40px;
-      width: 1px; background: var(--line-soft);
-    }
-    .node { position: relative; }
-    .node::before {
-      content: ""; position: absolute; left: -44px; top: 14px;
-      width: 7px; height: 7px; background: var(--bg);
-      border: 1px solid var(--ink-faint); transform: rotate(45deg);
-    }
-    .node-hot::before { background: var(--accent); border-color: var(--accent); }
-  }
-
   /* ---------- Hero ---------- */
   .hero { padding: clamp(28px, 5vw, 64px) 0 clamp(40px, 6vw, 72px); }
   .hero-grid {
     display: grid; gap: clamp(24px, 4vw, 56px);
-    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.8fr);
     align-items: start;
   }
   @media (max-width: 940px) { .hero-grid { grid-template-columns: 1fr; } }
   h1 {
-    font-size: clamp(2.4rem, 5.6vw, 4.4rem);
-    line-height: 1.02;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 0.98;
     letter-spacing: -0.03em;
     font-weight: 800;
     margin: 0 0 20px;
-    max-width: 15ch;
+    max-width: 18ch;
     text-wrap: balance;
   }
   h1 em { font-style: normal; color: var(--accent); }
@@ -170,7 +154,9 @@
   /* status readout: the honest facts as an instrument panel */
   .readout {
     border: 1px solid var(--line-soft); border-radius: 6px;
-    background: var(--bg-well);
+    background-color: var(--bg-well);
+    background-image: radial-gradient(circle, rgba(255, 143, 43, 0.12) 0 1px, transparent 1.3px);
+    background-size: 9px 9px;
     font: 400 12.5px/1.5 var(--mono);
   }
   .readout-head {
@@ -187,20 +173,19 @@
 
   /* ---------- The workflow flow strip (a real sequence) ---------- */
   .flow {
-    list-style: none; counter-reset: fl;
+    list-style: none;
     margin: clamp(30px, 5vw, 52px) 0 14px; padding: 0;
     display: flex; flex-wrap: wrap; gap: 0;
     border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);
   }
   .flow li {
-    counter-increment: fl;
     flex: 1 1 180px; padding: 12px 18px 12px 0;
     font: 500 13px var(--mono); color: var(--ink-dim);
     display: flex; align-items: baseline; gap: 10px;
   }
   .flow li + li { border-left: 1px solid var(--line-soft); padding-left: 18px; }
   .flow li::before {
-    content: "0" counter(fl);
+    content: "→";
     color: var(--accent); font-weight: 600; font-size: 12px;
   }
   .flow li b { color: var(--ink); font-weight: 600; }
@@ -350,13 +335,13 @@
   .del { color: var(--del); }
   .log-entry.tt .log-action { color: var(--accent); }
 
-  /* ---------- Sections: meta column + body, ruled ---------- */
+  /* ---------- Sections: one focused body, ruled ---------- */
   section { border-top: 1px solid var(--line-soft); padding: clamp(44px, 7vw, 84px) 0; }
-  .sec { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 18px clamp(28px, 4vw, 64px); }
-  @media (max-width: 940px) { .sec { grid-template-columns: 1fr; gap: 10px; } }
+  .sec { display: block; }
+  .sec > div:last-child { max-width: 920px; }
+  #pricing .sec > div:last-child { max-width: none; }
   .sec-meta {
-    font: 500 12px/1.7 var(--mono); color: var(--ink-faint);
-    padding-top: 10px;
+    display: none;
   }
   .sec-meta b { color: var(--ink-dim); font-weight: 500; display: block; }
   h2 {
@@ -544,25 +529,21 @@
       <div>
         <h1>Record a Zustand bug <em>once</em>.</h1>
         <p class="lede">
-          See the exact state path that changed, the likely source call-site, and a
-          session your teammate can inspect. Store inspection and the timeline are free.
-          Trace Sessions are the Pro workflow, with three full previews included.
+          Replay the bug, inspect the exact state path that changed, and hand your
+          teammate a session they can inspect.
         </p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">View source on GitHub</a>
-          <a class="btn btn-ghost" href="https://github.com/KubaOpoczka/zustand-devtools#install" target="_blank" rel="noopener">Read beta setup</a>
+          <a class="btn btn-primary" href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">View source</a>
+          <a class="btn btn-ghost" href="https://github.com/KubaOpoczka/zustand-devtools#install" target="_blank" rel="noopener">Beta setup</a>
         </div>
       </div>
       <div class="readout" role="group" aria-label="Current project status">
         <p class="readout-head">Status readout</p>
         <dl>
           <dt>release</dt><dd><b>private beta</b></dd>
-          <dt>web store</dt><dd><span class="no">not submitted yet</span></dd>
-          <dt>checkout</dt><dd><span class="no">closed</span> · no payments accepted</dd>
-          <dt>npm bridge</dt><dd>0.1.1 · old protocol, skip it</dd>
-          <dt>beta needs</dt><dd><b>bridge 0.2.0</b> · built from GitHub</dd>
-          <dt>license</dt><dd><span class="ok">MIT</span> source</dd>
-          <dt>telemetry</dt><dd><span class="ok">none</span> · no analytics</dd>
+          <dt>install</dt><dd><b>GitHub build</b></dd>
+          <dt>price</dt><dd>€9.99 planned, one-time</dd>
+          <dt>privacy</dt><dd><span class="ok">zero telemetry</span></dd>
         </dl>
       </div>
     </div>
@@ -578,8 +559,8 @@
         <div class="win-bar"><span>app</span><span class="addr">localhost:3000</span></div>
         <div class="app-body">
           <div class="app-head">
-            <span class="shop">Acme Storefront</span>
-            <span class="app-user">user: <b id="app-user-name">Ada</b> · <b id="app-user-status">logged out</b></span>
+            <span class="shop">Relay Supply</span>
+            <span class="app-user">user: <b id="app-user-name">Ada</b> / <b id="app-user-status">logged out</b></span>
           </div>
           <div class="product">
             <span class="swatch" style="background: #6a5340;" aria-hidden="true"></span>
@@ -623,7 +604,7 @@
             </div>
           </div>
           <div class="dt-sec">
-            <p class="dt-label">Timeline · click an entry to time-travel (free)</p>
+            <p class="dt-label">Timeline: click an entry to time-travel (free)</p>
             <div id="dt-log" role="region" aria-label="Timeline entries" tabindex="0"></div>
           </div>
         </div>
@@ -643,11 +624,8 @@
       <div>
         <h2 id="free-h">Accurate stores, timeline, safe time travel.</h2>
         <p class="sub">
-          One line per store registers it with the extension for an accurate Stores view, a
-          searchable multi-store Timeline, and safe ID-based time travel that restores the
-          original in-memory state. A zero-setup, experimental Component Hooks view is also
-          included and clearly labelled, because its values are read from React hooks and are
-          not guaranteed to be Zustand state.
+          Register each store once for accurate inspection, searchable history and safe
+          ID-based time travel. The experimental zero-setup view stays clearly labelled.
         </p>
         <dl class="feature-rows">
           <div class="frow">
@@ -678,15 +656,12 @@
       <div>
         <h2 id="pricing-h">Rewind the bug.</h2>
         <p class="sub">
-          <b>Zustand DevTools Pro: Trace Sessions</b> is the paid tier. Press record while
-          you reproduce a bug, then inspect deep path-level diffs, best-effort source
-          call-sites, compare any two entries, filter, bookmark and annotate. Export a
-          redacted, versioned session a teammate can import and inspect offline (view-only,
-          validated, never executed).
+          Record while reproducing a bug. Then inspect path-level diffs, likely call-sites,
+          compare any entries, and export a redacted session for offline review.
         </p>
 
         <div class="win scrub" id="scrub" role="group" aria-label="Interactive illustration of a recorded Trace Session">
-          <div class="win-bar"><span>DevTools</span><span class="addr">Zustand · Trace Session</span><span style="margin-left:auto;">recorded session · 6 steps</span></div>
+          <div class="win-bar"><span>DevTools</span><span class="addr">Zustand / Trace Session</span><span style="margin-left:auto;">recorded session / 6 steps</span></div>
           <div class="scrub-body">
             <div class="sr-action">
               <span class="log-store" id="sc-store">[cart]</span>
@@ -729,12 +704,12 @@
 );</code></pre>
           </div>
           <div class="price-block">
-            <div class="price-line"><span class="p">€9.99</span><span class="once">planned founding price · one-time · no subscription</span></div>
+            <div class="price-line"><span class="p">€9.99</span><span class="once">planned founding price / one-time / no subscription</span></div>
             <ul class="price-feats">
               <li>Unlimited Trace Sessions (3 full previews free)</li>
               <li>Deep path-level diffs and best-effort call-sites</li>
-              <li>Compare any two entries · filters · bookmarks and notes</li>
-              <li>Redacted session export · validated view-only import</li>
+              <li>Compare any two entries, filters, bookmarks and notes</li>
+              <li>Redacted session export, validated view-only import</li>
             </ul>
             <p class="price-note">
               <b>Private beta:</b> checkout is not open and no payments are accepted today.
@@ -859,11 +834,12 @@
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms &amp; refunds</a>
       <a href="mailto:kuba.opoczka@gmail.com">Contact</a>
+      <a href="https://kubaopoczka.github.io/verify/proof/">Kuba's portfolio</a>
     </nav>
     <div class="foot-meta">
-      <span>© 2026 Zustand DevTools</span>
-      <span>extension 1.1.0 · bridge 0.2.0 (beta, unpublished)</span>
-      <span>no analytics · no telemetry</span>
+      <span>© 2026 Kuba Opoczka · Zustand DevTools</span>
+      <span>extension 1.1.0 / bridge 0.2.0 (beta, unpublished)</span>
+      <span>no analytics, no telemetry</span>
       <span>not affiliated with the Zustand or pmndrs projects</span>
     </div>
   </footer>
