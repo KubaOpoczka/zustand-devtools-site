@@ -5,6 +5,8 @@ An interactive product site for a Chrome DevTools extension that turns Zustand s
 [Open the live site](https://kubaopoczka.github.io/zustand-devtools-site/) ·
 [Inspect the extension source](https://github.com/KubaOpoczka/zustand-devtools)
 
+[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj) · [Unlock Pro](https://opoczka.gumroad.com/l/zustand-devtools-pro)
+
 ![Zustand DevTools Trace Sessions](./og.png)
 
 ## What this site demonstrates

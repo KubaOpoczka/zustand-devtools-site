@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy: Zustand DevTools</title>
-<meta name="description" content="Privacy policy for the Zustand DevTools Chrome extension: no analytics or telemetry, application state stays on your device, and the only network use is license activation via Lemon Squeezy.">
+<meta name="description" content="Privacy policy for the Zustand DevTools Chrome extension: no analytics or telemetry, application state stays on your device, and the only network use is licence verification via Gumroad.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff8f2b'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-size='18' font-weight='800' fill='%23131211' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <style>
   @font-face {
@@ -77,7 +77,7 @@
 <main class="wrap">
   <a class="crumb" href="index.html"><span class="mark" aria-hidden="true">Z</span>Zustand DevTools · back to site</a>
   <h1>Privacy Policy for Zustand DevTools</h1>
-  <div class="updated">Last updated: 2026-07-17</div>
+  <div class="updated">Last updated: 2026-08-04</div>
 
   <p>Zustand DevTools does not send your application state, trace contents, browsing
   history, or other website content to the developer or to anyone else. There is no
@@ -105,23 +105,22 @@
     browser. They remain wherever you saved them until you delete them.</li>
   </ul>
 
-  <h2>License activation (the only network use)</h2>
-  <p>If you paste a license key into the Trace Sessions tab to unlock the Pro tier, the
-  extension sends two things to Lemon Squeezy's license activation API: the license key
-  you entered and a generic instance name (the fixed string "Zustand DevTools"). The
-  activation result is stored locally so you don't have to re-enter the key. If
-  activation fails, you can retry it; each attempt sends the same fields.</p>
-  <p>If a future version adds periodic license re-validation or a deactivate button,
-  those calls would send only the licensing fields Lemon Squeezy requires for them (the
-  license key and the stored instance ID). No application state, trace contents,
-  browsing history, or payment details are ever sent to Lemon Squeezy. Payment itself
-  happens on Lemon Squeezy's own checkout page, outside the extension.</p>
+  <h2>Licence activation (the only network use)</h2>
+  <p>If you paste a licence key into the Trace Sessions tab, tick the disclosure and choose
+  Activate, Chrome asks for optional access to <code>api.gumroad.com</code>. The extension
+  sends the key, this product's public ID and a use-count flag to Gumroad's licence
+  verification API. The accepted key, product ID, use count and verification timestamps
+  are stored locally so you do not have to re-enter the key.</p>
+  <p>An active licence is re-checked after 30 days without incrementing its use count.
+  Removing the saved licence also removes the optional Gumroad permission. Application
+  state, trace contents, browsing history and payment details are never included in these
+  requests. Payment happens on Gumroad's checkout page, outside the extension.</p>
 
   <h2>Third-party services</h2>
-  <p>Lemon Squeezy (<code>api.lemonsqueezy.com</code>) receives the licensing fields
-  described above when you activate a license, and processes purchases as merchant of
-  record on its own site. See Lemon Squeezy's privacy policy for how they handle that
-  data. No other third party receives anything. The developer operates no server:
+  <p>Gumroad (<code>api.gumroad.com</code>) receives the licensing fields described above
+  when you activate or revalidate a licence, and processes purchases on its own site.
+  See Gumroad's privacy policy for how it handles that data. No other third party receives
+  anything. The developer operates no server:
   apart from the licensing requests you trigger, nothing leaves your machine.</p>
 
   <h2>Trace session files (export and import)</h2>

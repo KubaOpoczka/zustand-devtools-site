@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zustand DevTools: Trace Sessions for Zustand debugging in Chrome DevTools</title>
-<meta name="description" content="Record a Zustand bug once. See the exact state path that changed, the likely source call-site, and a session your teammate can inspect. Free store inspector and timeline; Pro Trace Sessions. Private beta.">
+<meta name="description" content="Record a Zustand bug once. See the exact state path that changed, the likely source call-site, and a session your teammate can inspect. Free store inspector and timeline; Pro Trace Sessions.">
 <meta property="og:title" content="Zustand DevTools: Trace Sessions">
-<meta property="og:description" content="Record a Zustand bug once: path-level diffs, likely call-sites, shareable debugging sessions. Free inspector and timeline; Pro Trace Sessions (private beta).">
+<meta property="og:description" content="Record a Zustand bug once: path-level diffs, likely call-sites, shareable debugging sessions. Free inspector and timeline; Pro Trace Sessions.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kubaopoczka.github.io/zustand-devtools-site/">
 <meta property="og:image" content="https://kubaopoczka.github.io/zustand-devtools-site/og.png">
@@ -533,16 +533,16 @@
           teammate a session they can inspect.
         </p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">View source</a>
-          <a class="btn btn-ghost" href="https://github.com/KubaOpoczka/zustand-devtools#install" target="_blank" rel="noopener">Beta setup</a>
+          <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Install from Chrome</a>
+          <a class="btn btn-ghost" href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Unlock Pro</a>
         </div>
       </div>
       <div class="readout" role="group" aria-label="Current project status">
         <p class="readout-head">Status readout</p>
         <dl>
-          <dt>release</dt><dd><b>private beta</b></dd>
-          <dt>install</dt><dd><b>GitHub build</b></dd>
-          <dt>price</dt><dd>€9.99 planned, one-time</dd>
+          <dt>release</dt><dd><b>public</b></dd>
+          <dt>install</dt><dd><b>Chrome Web Store</b></dd>
+          <dt>price</dt><dd>€9.99 one-time</dd>
           <dt>privacy</dt><dd><span class="ok">zero telemetry</span></dd>
         </dl>
       </div>
@@ -649,7 +649,7 @@
     <div class="sec">
       <div class="sec-meta">
         <b>Pro tier</b>
-        €9.99 planned<br>
+        €9.99<br>
         one-time · no subscription<br>
         3 previews free
       </div>
@@ -704,7 +704,7 @@
 );</code></pre>
           </div>
           <div class="price-block">
-            <div class="price-line"><span class="p">€9.99</span><span class="once">planned founding price / one-time / no subscription</span></div>
+            <div class="price-line"><span class="p">€9.99</span><span class="once">one-time / no subscription</span></div>
             <ul class="price-feats">
               <li>Unlimited Trace Sessions (3 full previews free)</li>
               <li>Deep path-level diffs and best-effort call-sites</li>
@@ -712,14 +712,12 @@
               <li>Redacted session export, validated view-only import</li>
             </ul>
             <p class="price-note">
-              <b>Private beta:</b> checkout is not open and no payments are accepted today.
-              When it opens, purchases will be processed by Lemon Squeezy as merchant of
-              record (payment, VAT, invoices). They generate your license key, you paste it
-              into the extension, and it activates through their License API. One license,
-              planned allowance of up to 5 device activations,
-              <a href="terms.html">14-day no-questions refund</a>. Until then:
-              <a href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">view the source</a>
-              or <a href="mailto:kuba.opoczka@gmail.com?subject=Zustand%20DevTools%20beta">join the beta</a>.
+              Install the free Stores and Timeline tools from the
+              <a href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Chrome Web Store</a>.
+              Pro is a €9.99 one-time Gumroad purchase with up to 5 device activations and a
+              <a href="terms.html">14-day no-questions refund</a>. Gumroad delivers the licence
+              key; activation sends only that key and this product's public ID after consent.
+              <a href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Unlock Pro</a>.
             </p>
           </div>
         </div>
@@ -731,21 +729,16 @@
     <div class="sec">
       <div class="sec-meta">
         <b>setup</b>
-        3 steps · unpacked beta
+        3 steps · public release
       </div>
       <div>
         <h2 id="start-h">Get started</h2>
         <div class="steps">
           <div class="step">
-            <p><b>Install the extension.</b> Chrome Web Store launch preparation is in
-            progress; the extension has not been submitted yet. Until the listing lands, the
-            <a href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">source is on GitHub</a>
-            and loads as an unpacked extension. The beta pairs extension 1.1.0 with bridge
-            0.2.0, built from that same repository (the README's
-            <a href="https://github.com/KubaOpoczka/zustand-devtools#install" target="_blank" rel="noopener">beta setup</a>
-            walks through it). npm still serves bridge 0.1.1, which speaks the old protocol
-            and does not work with this extension, so don't install it for the beta; 0.2.0
-            will be published to npm before the public launch.</p>
+            <p><b>Install the extension</b> from the
+            <a href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Chrome Web Store</a>,
+            then add <a href="https://www.npmjs.com/package/zustand-devtools-bridge" target="_blank" rel="noopener"><code>zustand-devtools-bridge</code> 0.2.0</a>
+            to the app. Wrap each store you want to inspect and give it a stable name.</p>
           </div>
           <div class="step">
             <p><b>Open DevTools and click the Zustand tab.</b> Registered stores and the
@@ -754,8 +747,8 @@
           </div>
           <div class="step">
             <p><b>Want unlimited Trace Sessions?</b> Every install includes three full
-            preview sessions. Pro unlocks unlimited ones once checkout opens. During the
-            private beta nothing is charged.</p>
+            preview sessions. <a href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Pro unlocks unlimited sessions</a>
+            for €9.99 once.</p>
           </div>
         </div>
       </div>
@@ -773,12 +766,9 @@
         <div class="faq">
           <details>
             <summary>Can I use it today?</summary>
-            <p>The project is in private beta. Chrome Web Store launch preparation is in
-            progress, but the extension has not been submitted yet, so it is not installable
-            from the store. Checkout is closed and no payments are accepted. The
-            <a href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">source is on GitHub</a>
-            and loads as an unpacked extension, and you can
-            <a href="mailto:kuba.opoczka@gmail.com?subject=Zustand%20DevTools%20beta">join the beta</a>.</p>
+            <p>Yes. Install the public release from the
+            <a href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Chrome Web Store</a>.
+            Stores and Timeline are free; Pro Trace Sessions are an optional €9.99 one-time purchase.</p>
           </details>
           <details>
             <summary>What do I need for it to work?</summary>
@@ -786,9 +776,10 @@
             using React 16.8+ with Zustand 4 or 5. Accurate store inspection uses the
             one-line <code>zustand-devtools-bridge</code> wrapper per store; the experimental
             Component Hooks view is zero-setup but not guaranteed to show Zustand state.
-            During the beta, build the bridge from
-            <a href="https://github.com/KubaOpoczka/zustand-devtools#install" target="_blank" rel="noopener">the repository</a>:
-            the npm release is still 0.1.1, which does not work with extension 1.1.0.</p>
+            Install bridge 0.2.0 from
+            <a href="https://www.npmjs.com/package/zustand-devtools-bridge" target="_blank" rel="noopener">npm</a>.
+            The <a href="https://github.com/KubaOpoczka/zustand-devtools#install" target="_blank" rel="noopener">repository README</a>
+            includes the setup example.</p>
           </details>
           <details>
             <summary>Does it conflict with the React DevTools extension?</summary>
@@ -803,16 +794,15 @@
             keeps (recent Trace Sessions, the free-preview counter, a license record) lives
             in your browser's local extension storage. The bridge keeps a bounded per-tab
             history in the inspected page's own sessionStorage. The only network requests
-            are ones you trigger yourself: activating a license sends the key and a generic
-            instance name to Lemon Squeezy. Full details in the
+            are ones you trigger yourself: activating a licence sends the key and this
+            product's public ID to Gumroad. Full details in the
             <a href="privacy.html">privacy policy</a>.</p>
           </details>
           <details>
             <summary>How does the license work?</summary>
-            <p>Once checkout opens: one €9.99 purchase, Lemon Squeezy generates and delivers
-            a license key, you paste it into the extension, and it activates through their
-            License API. Planned allowance of up to 5 device activations, no subscription,
-            no expiry. Live purchasing is not enabled during the private beta.</p>
+            <p>One €9.99 Gumroad purchase generates and delivers a licence key. Paste it into
+            the extension and approve the one-time optional Gumroad permission to activate.
+            One licence supports up to 5 device activations, with no subscription or expiry.</p>
           </details>
           <details>
             <summary>What if it doesn't work for me?</summary>
