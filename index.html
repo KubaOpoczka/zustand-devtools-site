@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://kubaopoczka.github.io/zustand-devtools-site/">
 <meta property="og:image" content="https://kubaopoczka.github.io/zustand-devtools-site/og.png">
 <meta name="theme-color" content="#131211">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff8f2b'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-size='18' font-weight='800' fill='%23131211' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-size='18' font-weight='800' fill='%23ffffff' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <style>
   /* Self-hosted, SIL OFL licensed (see fonts/OFL-*.txt). No third-party requests. */
   @font-face {
@@ -40,8 +40,9 @@
     --ink: #f3eee5;
     --ink-dim: #cfc8bb;
     --ink-faint: #a89f90;
-    --accent: #ff8f2b;
-    --on-accent: #131211;
+    --accent: #818cf8;
+    --accent-solid: #4f46e5;
+    --on-accent: #ffffff;
     --add: #8fce9b;
     --del: #e89288;
     --sans: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
@@ -62,7 +63,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  ::selection { background: var(--accent); color: var(--on-accent); }
+  ::selection { background: var(--accent-solid); color: var(--on-accent); }
   a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
   a:hover { text-decoration-thickness: 2px; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
@@ -72,7 +73,7 @@
 
   .skip-link {
     position: absolute; left: 12px; top: -60px; z-index: var(--z-overlay);
-    background: var(--accent); color: var(--on-accent); font: 600 14px var(--sans);
+    background: var(--accent-solid); color: var(--on-accent); font: 600 14px var(--sans);
     padding: 10px 16px; border-radius: 0 0 6px 6px; text-decoration: none;
     transition: top var(--t) var(--ease);
   }
@@ -91,7 +92,7 @@
   }
   .mark {
     width: 32px; height: 32px; border-radius: 7px; flex: none;
-    background: var(--accent); color: var(--on-accent);
+    background: var(--accent-solid); color: var(--on-accent);
     display: grid; place-items: center;
     font-family: var(--sans); font-weight: 800; font-size: 17px;
   }
@@ -143,8 +144,8 @@
       border-color var(--t) var(--ease), color var(--t) var(--ease);
   }
   .btn:active { transform: scale(0.98); }
-  .btn-primary { background: var(--accent); color: var(--on-accent); border: 1px solid transparent; }
-  .btn-primary:hover { background: #ffa14e; }
+  .btn-primary { background: var(--accent-solid); color: var(--on-accent); border: 1px solid transparent; }
+  .btn-primary:hover { background: #6366f1; }
   .btn-ghost {
     background: transparent; color: var(--ink); border: 1px solid var(--line);
     font-family: var(--mono); font-weight: 500; font-size: 13.5px;
@@ -155,7 +156,7 @@
   .readout {
     border: 1px solid var(--line-soft); border-radius: 6px;
     background-color: var(--bg-well);
-    background-image: radial-gradient(circle, rgba(255, 143, 43, 0.12) 0 1px, transparent 1.3px);
+    background-image: radial-gradient(circle, rgba(129, 140, 248, 0.12) 0 1px, transparent 1.3px);
     background-size: 9px 9px;
     font: 400 12.5px/1.5 var(--mono);
   }
@@ -307,7 +308,7 @@
   .v, .dt-row { font-variant-numeric: tabular-nums; }
   .bump { animation: bump 0.24s var(--ease); }
   @keyframes bump {
-    0% { background: rgba(255, 143, 43, 0.28); border-radius: 3px; }
+    0% { background: rgba(129, 140, 248, 0.28); border-radius: 3px; }
     100% { background: transparent; }
   }
 
