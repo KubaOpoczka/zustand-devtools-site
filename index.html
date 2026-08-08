@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kubaopoczka.github.io/zustand-devtools-site/">
 <meta property="og:image" content="https://kubaopoczka.github.io/zustand-devtools-site/og.png">
-<meta name="theme-color" content="#131211">
+<meta name="theme-color" content="#0d0b1f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-size='18' font-weight='800' fill='%23ffffff' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <style>
   /* Self-hosted, SIL OFL licensed (see fonts/OFL-*.txt). No third-party requests. */
@@ -27,20 +27,20 @@
     font-display: swap;
   }
 
-  /* ---------- Tokens: warm graphite bench, paper ink, change-orange signal.
-     Orange is the colour of a changed path; green and red appear only as
+  /* ---------- Tokens: midnight instrument panel, violet signal.
+     Violet is the product colour; green and red appear only as
      state additions and removals. ---------- */
   :root {
     color-scheme: dark;
-    --bg: #131211;
-    --bg-raise: #1b1a18;
-    --bg-well: #0d0c0b;
-    --line: #383430;
-    --line-soft: #262320;
-    --ink: #f3eee5;
-    --ink-dim: #cfc8bb;
-    --ink-faint: #a89f90;
-    --accent: #818cf8;
+    --bg: #0d0b1f;
+    --bg-raise: #15122c;
+    --bg-well: #090817;
+    --line: #3a3460;
+    --line-soft: #25213f;
+    --ink: #f7f5ff;
+    --ink-dim: #d5d0e9;
+    --ink-faint: #aaa2c6;
+    --accent: #a89cff;
     --accent-solid: #4f46e5;
     --on-accent: #ffffff;
     --add: #8fce9b;
@@ -145,7 +145,7 @@
   }
   .btn:active { transform: scale(0.98); }
   .btn-primary { background: var(--accent-solid); color: var(--on-accent); border: 1px solid transparent; }
-  .btn-primary:hover { background: #6366f1; }
+  .btn-primary:hover { background: #635bff; }
   .btn-ghost {
     background: transparent; color: var(--ink); border: 1px solid var(--line);
     font-family: var(--mono); font-weight: 500; font-size: 13.5px;
@@ -156,7 +156,7 @@
   .readout {
     border: 1px solid var(--line-soft); border-radius: 6px;
     background-color: var(--bg-well);
-    background-image: radial-gradient(circle, rgba(129, 140, 248, 0.12) 0 1px, transparent 1.3px);
+    background-image: radial-gradient(circle, rgba(139, 124, 255, 0.12) 0 1px, transparent 1.3px);
     background-size: 9px 9px;
     font: 400 12.5px/1.5 var(--mono);
   }
@@ -308,7 +308,7 @@
   .v, .dt-row { font-variant-numeric: tabular-nums; }
   .bump { animation: bump 0.24s var(--ease); }
   @keyframes bump {
-    0% { background: rgba(129, 140, 248, 0.28); border-radius: 3px; }
+    0% { background: rgba(139, 124, 255, 0.28); border-radius: 3px; }
     100% { background: transparent; }
   }
 
@@ -715,7 +715,7 @@
             <p class="price-note">
               Install the free Stores and Timeline tools from the
               <a href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Chrome Web Store</a>.
-              Pro is a €9.99 one-time Gumroad purchase with up to 5 device activations and a
+              Pro is a €9.99 one-time Gumroad purchase with up to 5 Chrome profile activations and a
               <a href="terms.html">30-day no-questions refund</a>. Gumroad delivers the licence
               key; activation sends only that key and this product's public ID after consent.
               <a href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Unlock Pro</a>.
@@ -803,7 +803,7 @@
             <summary>How does the license work?</summary>
             <p>One €9.99 Gumroad purchase generates and delivers a licence key. Paste it into
             the extension and approve the one-time optional Gumroad permission to activate.
-            One licence supports up to 5 device activations, with no subscription or expiry.</p>
+            One licence supports up to 5 Chrome profile activations, with no subscription or expiry.</p>
           </details>
           <details>
             <summary>What if it doesn't work for me?</summary>
@@ -913,7 +913,7 @@
   function snapshot() { return JSON.parse(JSON.stringify(state)); }
 
   /* Path-level diff over the known demo shape. + additions are green,
-     - removals red, changed paths orange: the accent is the colour of a
+     - removals red, changed paths violet: the accent is the colour of a
      changed path. */
   function diffPaths(prev, next) {
     var out = [];

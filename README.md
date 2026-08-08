@@ -13,7 +13,7 @@ An interactive product site for a Chrome DevTools extension that turns Zustand s
 
 - A complete state-debugging workflow: inspect, record, diff, trace, and share.
 - Path-level state changes and likely source call-sites presented as an instrument, not a generic dashboard.
-- Clear separation between the free local inspector and the private-beta Trace Sessions concept.
+- Clear separation between the free local inspector and the public Pro Trace Sessions workflow.
 - Responsive, keyboard-accessible interaction with reduced-motion support.
 
 ## Implementation
@@ -38,7 +38,7 @@ Then open `http://localhost:8080`.
 
 ## Privacy and status
 
-The public site does not require an account and does not embed analytics or third-party scripts. The extension itself is a public beta; product status and limitations are stated directly on the page.
+The public site does not require an account and does not embed analytics or third-party scripts. The extension is public on the Chrome Web Store; product status and limitations are stated directly on the page.
 
 ## Authorship
 
