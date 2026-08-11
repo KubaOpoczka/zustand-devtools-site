@@ -36,6 +36,12 @@ python3 -m http.server 8080
 
 Then open `http://localhost:8080`.
 
+Check the revenue-path copy, checkout link, diagnosis anchor and local support pages:
+
+```bash
+bash scripts/check-buyer-paths.sh
+```
+
 ## Privacy and status
 
 The public site does not require an account and does not embed analytics or third-party scripts. The extension is public on the Chrome Web Store; product status and limitations are stated directly on the page.

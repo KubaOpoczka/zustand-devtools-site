@@ -154,6 +154,11 @@
     text-wrap: pretty;
   }
   .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .cta-note {
+    margin: 10px 0 0;
+    color: var(--ink-faint);
+    font: 500 11.5px/1.5 var(--mono);
+  }
   .btn {
     display: inline-flex; align-items: center; gap: 9px;
     font: 600 15px var(--sans); text-decoration: none;
@@ -357,6 +362,7 @@
 
   /* ---------- Sections: one focused body, ruled ---------- */
   section { border-top: 1px solid var(--line-soft); padding: clamp(44px, 7vw, 84px) 0; }
+  section[id] { scroll-margin-top: 20px; }
   .sec { display: block; }
   .sec > div:last-child { max-width: 920px; }
   #pricing .sec > div:last-child { max-width: none; }
@@ -572,16 +578,17 @@
           teammate a session they can inspect.
         </p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Install from Chrome</a>
-          <a class="btn btn-ghost" href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Buy Pro · €9.99 once</a>
+          <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Try 3 Trace Sessions free</a>
+          <a class="btn btn-ghost" href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Buy Pro · €9.99 + tax</a>
         </div>
+        <p class="cta-note">No card · 3 full sessions · buy only if useful</p>
       </div>
       <div class="readout" role="group" aria-label="Current project status">
         <p class="readout-head">Status readout</p>
         <dl>
           <dt>release</dt><dd><b>public</b></dd>
           <dt>install</dt><dd><b>Chrome Web Store</b></dd>
-          <dt>price</dt><dd>€9.99 one-time</dd>
+          <dt>price</dt><dd>€9.99 + applicable tax</dd>
           <dt>proof</dt><dd>100 automated tests</dd>
           <dt>privacy</dt><dd><span class="ok">zero telemetry</span></dd>
         </dl>
@@ -689,7 +696,7 @@
     <div class="sec">
       <div class="sec-meta">
         <b>Pro tier</b>
-        €9.99<br>
+        €9.99 + applicable tax<br>
         one-time · no subscription<br>
         3 previews free
       </div>
@@ -744,7 +751,7 @@
 );</code></pre>
           </div>
           <div class="price-block">
-            <div class="price-line"><span class="p">€9.99</span><span class="once">one-time / no subscription</span></div>
+            <div class="price-line"><span class="p">€9.99</span><span class="once">+ applicable tax · one-time / no subscription</span></div>
             <ul class="price-feats">
               <li>Unlimited Trace Sessions (3 full previews free)</li>
               <li>Deep path-level diffs and best-effort call-sites</li>
@@ -754,7 +761,7 @@
             <p class="price-note">
               Install the free Stores and Timeline tools from the
               <a href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Chrome Web Store</a>.
-              Pro is a €9.99 one-time Gumroad purchase with up to 5 Chrome profile activations and a
+              Pro is a one-time Gumroad purchase (base price €9.99 plus applicable tax) with up to 5 Chrome profile activations and a
               <a href="terms.html">30-day no-questions refund</a>. Gumroad delivers the licence
               key; activation sends only that key and this product's public ID after consent.
               <a href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Unlock Pro</a>.
@@ -765,7 +772,7 @@
     </div>
   </section>
 
-  <section aria-labelledby="diagnosis-h" class="node">
+  <section id="diagnosis" aria-labelledby="diagnosis-h" class="node">
     <div class="sec">
       <div class="sec-meta">
         <b>expert help</b>
@@ -788,8 +795,8 @@
             <li>Annotated change path and best-effort call-site review</li>
             <li>Written diagnosis, likely causes and concrete next checks within three working days</li>
           </ul>
-          <p class="service-note">Email the trace and a short reproduction first. If the trace is not sufficient to perform the review, the engagement does not start. Scope and payment are confirmed in writing.</p>
-          <a class="btn btn-primary" href="mailto:kuba.opoczka@gmail.com?subject=Async%20Zustand%20Trace%20Diagnosis&amp;body=Expected%20behavior%3A%0A%0AActual%20behavior%3A%0A%0ATrace%20Session%20attached%20(redacted)%3A%20yes%2Fno%0A">Send the bug brief</a>
+          <p class="service-note">Check fit with the brief first. Do not email secrets or unredacted production state. If the trace is not sufficient to perform the review, the engagement does not start. No payment is due until scope is confirmed in writing.</p>
+          <a class="btn btn-primary" href="mailto:kuba.opoczka@gmail.com?subject=Async%20Zustand%20Trace%20Diagnosis%20%5Bproduct-site%5D&amp;body=Zustand%20version%3A%0A%0AReact%20version%3A%0A%0ANumber%20of%20stores%3A%0A%0AExpected%20behavior%3A%0A%0AActual%20behavior%3A%0A%0AMinimal%20reproduction%3A%0A%0ARedacted%20Trace%20Session%20available%3A%20yes%2Fno%0A%0ADeadline%20(if%20any)%3A%0A%0APlease%20do%20not%20include%20secrets%20or%20unredacted%20production%20state.%0A">Check fit — no payment yet</a>
         </div>
       </div>
     </div>
@@ -818,7 +825,7 @@
           <div class="step">
             <p><b>Want unlimited Trace Sessions?</b> Every install includes three full
             preview sessions. <a href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Pro unlocks unlimited sessions</a>
-            for €9.99 once.</p>
+            for €9.99 plus applicable tax, once.</p>
           </div>
         </div>
       </div>
@@ -863,7 +870,7 @@
             <summary>Can I use it today?</summary>
             <p>Yes. Install the public release from the
             <a href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Chrome Web Store</a>.
-            Stores and Timeline are free; Pro Trace Sessions are an optional €9.99 one-time purchase.</p>
+            Stores and Timeline are free; Pro Trace Sessions are an optional €9.99 plus applicable tax, one-time purchase.</p>
           </details>
           <details>
             <summary>What do I need for it to work?</summary>
@@ -895,7 +902,7 @@
           </details>
           <details>
             <summary>How does the license work?</summary>
-            <p>One €9.99 Gumroad purchase generates and delivers a licence key. Paste it into
+            <p>A one-time Gumroad purchase (base price €9.99 plus applicable tax) generates and delivers a licence key. Paste it into
             the extension and approve the one-time optional Gumroad permission to activate.
             One licence supports up to 5 Chrome profile activations, with no subscription or expiry.</p>
           </details>
