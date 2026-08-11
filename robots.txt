@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kubaopoczka.github.io/zustand-devtools-site/sitemap.xml

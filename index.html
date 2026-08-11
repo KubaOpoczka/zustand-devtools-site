@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zustand DevTools: Trace Sessions for Zustand debugging in Chrome DevTools</title>
+<title>Zustand DevTools: Trace Sessions for debugging</title>
 <meta name="description" content="Record a Zustand bug once. See the exact state path that changed, the likely source call-site, and a session your teammate can inspect. Free store inspector and timeline; Pro Trace Sessions.">
 <meta property="og:title" content="Zustand DevTools: Trace Sessions">
 <meta property="og:description" content="Record a Zustand bug once: path-level diffs, likely call-sites, shareable debugging sessions. Free inspector and timeline; Pro Trace Sessions.">
@@ -11,7 +11,26 @@
 <meta property="og:url" content="https://kubaopoczka.github.io/zustand-devtools-site/">
 <meta property="og:image" content="https://kubaopoczka.github.io/zustand-devtools-site/og.png">
 <meta name="theme-color" content="#0d0b1f">
+<link rel="canonical" href="https://kubaopoczka.github.io/zustand-devtools-site/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-size='18' font-weight='800' fill='%23ffffff' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Zustand DevTools",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Chrome, Chromium",
+  "softwareVersion": "1.1.1",
+  "description": "A Chrome DevTools panel for registered Zustand stores with live state, action timelines, safe time travel and optional Trace Sessions.",
+  "url": "https://kubaopoczka.github.io/zustand-devtools-site/",
+  "downloadUrl": "https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj",
+  "offers": [
+    { "@type": "Offer", "price": "0", "priceCurrency": "EUR", "name": "Free" },
+    { "@type": "Offer", "price": "9.99", "priceCurrency": "EUR", "name": "Pro Trace Sessions" }
+  ],
+  "author": { "@type": "Person", "name": "Kuba Opoczka" }
+}
+</script>
 <style>
   /* Self-hosted, SIL OFL licensed (see fonts/OFL-*.txt). No third-party requests. */
   @font-face {
@@ -431,6 +450,24 @@
   .price-note { font-size: 13px; color: var(--ink-faint); line-height: 1.65; }
   .price-note b { color: var(--ink-dim); }
 
+  /* productized help and durable guides */
+  .service-card, .resource-card {
+    border: 1px solid var(--line); background: var(--bg-raise); border-radius: 6px;
+    padding: clamp(18px, 3vw, 28px);
+  }
+  .service-top { display: flex; gap: 20px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
+  .service-top h3, .resource-card h3 { margin: 0 0 8px; font-size: 19px; line-height: 1.2; }
+  .service-price { font: 700 24px/1 var(--sans); white-space: nowrap; }
+  .service-price small { display: block; margin-top: 7px; color: var(--ink-faint); font: 500 11px var(--mono); }
+  .service-list { margin: 18px 0; padding-left: 20px; color: var(--ink-dim); font-size: 14.5px; }
+  .service-note { color: var(--ink-faint); font-size: 13px; max-width: 68ch; }
+  .resource-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .resource-card { color: var(--ink-dim); text-decoration: none; transition: border-color var(--t) var(--ease); }
+  .resource-card:hover { border-color: var(--accent); text-decoration: none; }
+  .resource-card p { margin: 0; font-size: 14px; }
+  .resource-card .read { display: block; color: var(--accent); margin-top: 16px; font: 500 12px var(--mono); }
+  @media (max-width: 700px) { .resource-grid { grid-template-columns: 1fr; } }
+
   /* steps: a real install sequence, numbering earned */
   .steps { display: grid; gap: 0; max-width: 720px; counter-reset: step; }
   .step {
@@ -519,6 +556,7 @@
     <div class="wordmark">Zustand <span>DevTools</span></div>
     <nav aria-label="Main">
       <a href="#pricing">Pricing</a>
+      <a href="#guides">Guides</a>
       <a href="#faq">FAQ</a>
       <a class="gh-link" href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">GitHub</a>
     </nav>
@@ -535,7 +573,7 @@
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Install from Chrome</a>
-          <a class="btn btn-ghost" href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Unlock Pro</a>
+          <a class="btn btn-ghost" href="https://opoczka.gumroad.com/l/zustand-devtools-pro" target="_blank" rel="noopener">Buy Pro · €9.99 once</a>
         </div>
       </div>
       <div class="readout" role="group" aria-label="Current project status">
@@ -544,6 +582,7 @@
           <dt>release</dt><dd><b>public</b></dd>
           <dt>install</dt><dd><b>Chrome Web Store</b></dd>
           <dt>price</dt><dd>€9.99 one-time</dd>
+          <dt>proof</dt><dd>100 automated tests</dd>
           <dt>privacy</dt><dd><span class="ok">zero telemetry</span></dd>
         </dl>
       </div>
@@ -726,6 +765,36 @@
     </div>
   </section>
 
+  <section aria-labelledby="diagnosis-h" class="node">
+    <div class="sec">
+      <div class="sec-meta">
+        <b>expert help</b>
+        €199 fixed scope<br>
+        async · no call required
+      </div>
+      <div>
+        <h2 id="diagnosis-h">A second pair of eyes on the state bug.</h2>
+        <p class="sub">When the trace is clear but the cause is not, send one redacted Trace Session and the behavior you expected.</p>
+        <div class="service-card">
+          <div class="service-top">
+            <div>
+              <h3>Async Zustand Trace Diagnosis</h3>
+              <p class="sub">A focused review of one reproducible Zustand state bug.</p>
+            </div>
+            <div class="service-price">€199<small>one diagnosis</small></div>
+          </div>
+          <ul class="service-list">
+            <li>Review of one redacted Trace Session plus expected and actual behavior</li>
+            <li>Annotated change path and best-effort call-site review</li>
+            <li>Written diagnosis, likely causes and concrete next checks within three working days</li>
+          </ul>
+          <p class="service-note">Email the trace and a short reproduction first. If the trace is not sufficient to perform the review, the engagement does not start. Scope and payment are confirmed in writing.</p>
+          <a class="btn btn-primary" href="mailto:kuba.opoczka@gmail.com?subject=Async%20Zustand%20Trace%20Diagnosis&amp;body=Expected%20behavior%3A%0A%0AActual%20behavior%3A%0A%0ATrace%20Session%20attached%20(redacted)%3A%20yes%2Fno%0A">Send the bug brief</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section aria-labelledby="start-h" class="node">
     <div class="sec">
       <div class="sec-meta">
@@ -756,11 +825,36 @@
     </div>
   </section>
 
+  <section id="guides" aria-labelledby="guides-h" class="node">
+    <div class="sec">
+      <div class="sec-meta">
+        <b>guides</b>
+        practical · source-linked
+      </div>
+      <div>
+        <h2 id="guides-h">Debug the state change, not the symptom.</h2>
+        <p class="sub">Two short field guides for teams deciding how to inspect and reproduce Zustand state bugs.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="debug-zustand-state-changes.html">
+            <h3>How to debug Zustand state changes</h3>
+            <p>A repeatable workflow for multiple stores, named actions, path-level diffs and safe reproduction.</p>
+            <span class="read">read the workflow →</span>
+          </a>
+          <a class="resource-card" href="zustand-devtools-comparison.html">
+            <h3>Zustand debugging tools compared</h3>
+            <p>When the official middleware, Redux DevTools and a dedicated Chrome panel each fit.</p>
+            <span class="read">compare the options →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="faq" aria-labelledby="faq-h" class="node">
     <div class="sec">
       <div class="sec-meta">
         <b>faq</b>
-        6 answers
+        7 answers
       </div>
       <div>
         <h2 id="faq-h">Questions people ask</h2>
@@ -812,6 +906,10 @@
             <a href="https://github.com/KubaOpoczka/zustand-devtools/issues" target="_blank" rel="noopener">GitHub issues</a>
             either way. See <a href="terms.html">terms and refunds</a>.</p>
           </details>
+          <details>
+            <summary>Is the €199 diagnosis part of the Pro licence?</summary>
+            <p>No. Pro is the self-serve extension licence. The Async Trace Diagnosis is a separate, fixed-scope professional service for one reproducible bug, agreed by email before payment.</p>
+          </details>
         </div>
       </div>
     </div>
@@ -822,6 +920,7 @@
     <nav class="foot-links" aria-label="Footer">
       <a href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.npmjs.com/package/zustand-devtools-bridge" target="_blank" rel="noopener">npm</a>
+      <a href="#guides">Guides</a>
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms &amp; refunds</a>
       <a href="mailto:kuba.opoczka@gmail.com">Contact</a>
@@ -829,7 +928,7 @@
     </nav>
     <div class="foot-meta">
       <span>© 2026 Kuba Opoczka · Zustand DevTools</span>
-      <span>extension 1.1.0 / bridge 0.2.0 (beta, unpublished)</span>
+      <span>extension 1.1.1 / bridge 0.2.0</span>
       <span>no analytics, no telemetry</span>
       <span>not affiliated with the Zustand or pmndrs projects</span>
     </div>

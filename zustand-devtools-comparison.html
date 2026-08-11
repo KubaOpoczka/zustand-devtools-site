@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Zustand debugging tools compared</title>
+    <meta
+      name="description"
+      content="Compare Zustand's official devtools middleware, Redux DevTools and dedicated Chrome DevTools panels by setup, store identity, timelines and trace sharing."
+    />
+    <link
+      rel="canonical"
+      href="https://kubaopoczka.github.io/zustand-devtools-site/zustand-devtools-comparison.html"
+    />
+    <link rel="stylesheet" href="guide.css" />
+    <meta property="og:title" content="Zustand debugging tools compared" />
+    <meta
+      property="og:description"
+      content="Choose the lightest debugging setup that answers the question you actually have."
+    />
+    <meta property="og:type" content="article" />
+  </head>
+  <body>
+    <main class="wrap">
+      <a class="crumb" href="index.html"
+        ><span class="mark" aria-hidden="true">Z</span>Zustand DevTools</a
+      >
+      <p class="eyebrow">Decision guide</p>
+      <h1>Choose the tool for the question.</h1>
+      <p class="lede">
+        Zustand already supports the Redux DevTools protocol through its
+        official middleware. Dedicated panels add a different workflow. The best
+        choice depends on whether you need a quick stream, per-store inspection,
+        or a shareable reproduction.
+      </p>
+      <div class="meta">
+        <span>6 minute read</span><span>updated 11 Aug 2026</span
+        ><span>no affiliate links</span>
+      </div>
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Best fit</th>
+            <th>Setup</th>
+            <th>Trade-off</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Official <code>devtools</code> middleware + Redux DevTools</td>
+            <td>
+              Teams already using Redux DevTools that want action and state
+              inspection
+            </td>
+            <td>Wrap the store and optionally name actions/stores</td>
+            <td>
+              Uses a general-purpose protocol and interface rather than a
+              Zustand-specific trace workflow
+            </td>
+          </tr>
+          <tr>
+            <td>Zustand DevTools free panel</td>
+            <td>
+              Multiple registered stores, live state, searchable timeline and
+              safe time travel
+            </td>
+            <td>One bridge wrapper per store</td>
+            <td>A separate Chrome extension and bridge dependency</td>
+          </tr>
+          <tr>
+            <td>Zustand DevTools Pro Trace Sessions</td>
+            <td>
+              Reproducing a difficult bug, comparing steps and sharing a
+              redacted offline session
+            </td>
+            <td>Same bridge; three previews included</td>
+            <td>
+              €9.99 one-time for unlimited sessions; call-sites remain
+              best-effort
+            </td>
+          </tr>
+          <tr>
+            <td>Console logging or custom instrumentation</td>
+            <td>
+              A tiny, isolated question or an environment where extensions are
+              unavailable
+            </td>
+            <td>Manual code</td>
+            <td>
+              Easy to add, easy to leave behind, and harder to compare or share
+              consistently
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Use the official middleware when</h2>
+      <ul>
+        <li>Your team already has a reliable Redux DevTools workflow.</li>
+        <li>Named actions and snapshots answer the question.</li>
+        <li>
+          You want the smallest addition and do not need a dedicated shareable
+          session.
+        </li>
+      </ul>
+      <h2>Use a dedicated panel when</h2>
+      <ul>
+        <li>You repeatedly switch between several named stores.</li>
+        <li>
+          You need the first changed path rather than a full-state eyeball
+          comparison.
+        </li>
+        <li>
+          The bug needs to be replayed or handed to another developer without
+          sharing live access.
+        </li>
+      </ul>
+      <div class="callout">
+        <p>
+          <strong>They are not mutually exclusive.</strong> Zustand DevTools
+          chains the React DevTools hook instead of replacing it, and the
+          official middleware remains a valid choice. Evaluate with a real bug
+          and keep the setup that makes the transition easiest to explain.
+        </p>
+      </div>
+      <h2>Questions to ask before adopting any debugging tool</h2>
+      <ul>
+        <li>Can we identify every store and meaningful action?</li>
+        <li>Does it expose sensitive state outside the machine?</li>
+        <li>Can time travel break external side effects?</li>
+        <li>
+          Can a teammate inspect the reproduction without reconstructing it?
+        </li>
+        <li>What happens when framework or browser APIs change?</li>
+      </ul>
+      <section class="cta">
+        <h2>Try the dedicated workflow on one bug.</h2>
+        <p>
+          The free tier includes registered Stores, Timeline, safe time travel
+          and three complete Trace Session previews.
+        </p>
+        <a
+          class="button"
+          href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj"
+          >Install from Chrome</a
+        >
+      </section>
+      <section class="sources">
+        <h2>Primary sources</h2>
+        <ul>
+          <li>
+            <a
+              href="https://zustand.docs.pmnd.rs/reference/middlewares/devtools"
+              >Official Zustand devtools middleware reference</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/reduxjs/redux-devtools"
+              >Redux DevTools source and documentation</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://zustand.docs.pmnd.rs/reference/integrations/third-party-libraries"
+              >Official Zustand third-party integrations</a
+            >
+          </li>
+        </ul>
+      </section>
+      <footer>
+        Written by Kuba Opoczka · <a href="privacy.html">privacy</a> ·
+        <a href="terms.html">terms</a>
+      </footer>
+    </main>
+  </body>
+</html>

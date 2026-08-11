@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>How to debug Zustand state changes: a repeatable workflow</title>
+    <meta
+      name="description"
+      content="A practical workflow for debugging Zustand state changes across multiple stores with named actions, timelines, diffs and reproducible traces."
+    />
+    <link
+      rel="canonical"
+      href="https://kubaopoczka.github.io/zustand-devtools-site/debug-zustand-state-changes.html"
+    />
+    <link rel="stylesheet" href="guide.css" />
+    <meta property="og:title" content="How to debug Zustand state changes" />
+    <meta
+      property="og:description"
+      content="Find the first wrong state transition, not the last visible symptom."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://kubaopoczka.github.io/zustand-devtools-site/debug-zustand-state-changes.html"
+    />
+  </head>
+  <body>
+    <main class="wrap">
+      <a class="crumb" href="index.html"
+        ><span class="mark" aria-hidden="true">Z</span>Zustand DevTools</a
+      >
+      <p class="eyebrow">Debugging field guide</p>
+      <h1>Find the first wrong state transition.</h1>
+      <p class="lede">
+        A UI symptom often appears several updates after the state first went
+        wrong. The useful question is not “what is the state now?” but “which
+        action changed this path, from what, and where was it called?”
+      </p>
+      <div class="meta">
+        <span>7 minute read</span><span>updated 11 Aug 2026</span
+        ><span>Zustand 4 and 5</span>
+      </div>
+      <div class="callout">
+        <p>
+          <strong>Short version:</strong> name the store, name the action,
+          reproduce once, then inspect the earliest unexpected path change.
+          Preserve a redacted trace before trying fixes.
+        </p>
+      </div>
+      <h2>A six-step workflow</h2>
+      <div class="step">
+        <span class="num">01</span>
+        <div>
+          <h3>Make the store identifiable</h3>
+          <p>
+            Give each store a stable name. This matters in apps with several
+            stores because a single global stream is otherwise easy to misread.
+          </p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <div>
+          <h3>Name important updates</h3>
+          <p>
+            Zustand's official <code>devtools</code> middleware accepts action
+            names as the third <code>set</code> argument. A label such as
+            <code>cart/addItem</code> is more useful than an anonymous update.
+          </p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <div>
+          <h3>Write expected and actual behavior first</h3>
+          <p>
+            One sentence each prevents the investigation from drifting. Include
+            the smallest reliable reproduction and avoid customer data.
+          </p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="num">04</span>
+        <div>
+          <h3>Record one clean reproduction</h3>
+          <p>
+            Start from a known state. Perform only the actions needed to trigger
+            the bug. Noise makes the first wrong transition harder to see.
+          </p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="num">05</span>
+        <div>
+          <h3>Follow the changed path backward</h3>
+          <p>
+            Start at the visible symptom, identify its backing state path, and
+            move backward until you find the first unexpected before/after
+            value. Check the associated action and best-effort call-site.
+          </p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="num">06</span>
+        <div>
+          <h3>Preserve evidence, then test a fix</h3>
+          <p>
+            Export a redacted session or record the relevant transitions. Change
+            one cause at a time and replay the same reproduction.
+          </p>
+        </div>
+      </div>
+      <h2>What to check when the timeline looks wrong</h2>
+      <ul>
+        <li>
+          The store may not be registered, or the action may be bypassing the
+          wrapped <code>set</code>.
+        </li>
+        <li>
+          Anonymous action labels can hide which code path initiated an update.
+        </li>
+        <li>
+          A computed UI value may be wrong even when stored state is correct.
+        </li>
+        <li>
+          Persisted or hydrated state can create an earlier transition than the
+          click you are watching.
+        </li>
+        <li>
+          Call-sites are best-effort debugging hints, not proof of causality.
+        </li>
+      </ul>
+      <h2>Privacy before sharing</h2>
+      <p>
+        State can contain tokens, email addresses and customer content. Remove
+        or redact sensitive keys before sharing a trace. Zustand DevTools keeps
+        inspection local and supports redacted export, but the person exporting
+        remains responsible for reviewing the file.
+      </p>
+      <section class="cta">
+        <h2>Inspect the next reproduction in Chrome.</h2>
+        <p>
+          Stores, Timeline and safe time travel are free. Three Trace Session
+          previews are included; unlimited sessions are €9.99 once.
+        </p>
+        <a
+          class="button"
+          href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj"
+          >Install Zustand DevTools</a
+        >
+      </section>
+      <section class="sources">
+        <h2>Primary sources and further reading</h2>
+        <ul>
+          <li>
+            <a
+              href="https://zustand.docs.pmnd.rs/reference/middlewares/devtools"
+              >Official Zustand devtools middleware reference</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://zustand.docs.pmnd.rs/reference/integrations/third-party-libraries"
+              >Official Zustand third-party integrations</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/pmndrs/zustand"
+              >Zustand source repository</a
+            >
+          </li>
+        </ul>
+      </section>
+      <footer>
+        Written by Kuba Opoczka · <a href="privacy.html">privacy</a> ·
+        <a href="terms.html">terms</a>
+      </footer>
+    </main>
+  </body>
+</html>
