@@ -145,9 +145,16 @@
         </p>
         <a
           class="button"
-          href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj"
+          data-store-install
+          href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj?utm_source=zustand_debugging_guide&amp;utm_medium=owned_content&amp;utm_campaign=zustand_trace_launch"
           >Install Zustand DevTools</a
         >
+        <p>
+          Still blocked after reviewing one redacted trace?
+          <a href="index.html#diagnosis">Check fit for an async Zustand Trace Diagnosis</a>:
+          one reproducible bug, €199 fixed scope, with payment only after scope is
+          confirmed in writing.
+        </p>
       </section>
       <section class="sources">
         <h2>Primary sources and further reading</h2>
@@ -176,5 +183,19 @@
         <a href="terms.html">terms</a>
       </footer>
     </main>
+    <script>
+      (() => {
+        const installLink = document.querySelector("[data-store-install]");
+        if (!installLink) return;
+
+        const pageParams = new URLSearchParams(window.location.search);
+        const storeUrl = new URL(installLink.href);
+        for (const key of ["utm_source", "utm_medium", "utm_campaign"]) {
+          const value = pageParams.get(key);
+          if (value) storeUrl.searchParams.set(key, value);
+        }
+        installLink.href = storeUrl.toString();
+      })();
+    </script>
   </body>
 </html>

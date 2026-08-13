@@ -2,7 +2,7 @@
 
 An interactive product site for a Chrome DevTools extension that turns Zustand state changes into inspectable debugging sessions.
 
-The bridge is listed in Zustand's official third-party libraries page as a community project. The listing is not an official recommendation or endorsement.
+The bridge is listed on Zustand's community-maintained third-party libraries page. The listing is not an official recommendation or endorsement.
 
 [Open the live site](https://kubaopoczka.github.io/zustand-devtools-site/) ·
 [Inspect the extension source](https://github.com/KubaOpoczka/zustand-devtools)

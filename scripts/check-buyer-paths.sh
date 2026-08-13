@@ -24,7 +24,7 @@ reject_text() {
 
 require_text 'Try 3 Trace Sessions free' "$page"
 require_text 'No card · 3 full sessions · buy only if useful' "$page"
-require_text "Listed in Zustand's official third-party libraries" "$page"
+require_text "Listed on Zustand's third-party libraries page" "$page"
 require_text 'community listing, not an official recommendation' "$page"
 require_text 'href="https://zustand.docs.pmnd.rs/reference/integrations/third-party-libraries"' "$page"
 require_text 'href="https://opoczka.gumroad.com/l/zustand-devtools-pro"' "$page"
