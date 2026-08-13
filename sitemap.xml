@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://kubaopoczka.github.io/zustand-devtools-site/</loc><lastmod>2026-08-11</lastmod></url>
+  <url><loc>https://kubaopoczka.github.io/zustand-devtools-site/</loc><lastmod>2026-08-13</lastmod></url>
+  <url><loc>https://kubaopoczka.github.io/zustand-devtools-site/name-zustand-stores-actions.html</loc><lastmod>2026-08-13</lastmod></url>
   <url><loc>https://kubaopoczka.github.io/zustand-devtools-site/debug-zustand-state-changes.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://kubaopoczka.github.io/zustand-devtools-site/zustand-devtools-comparison.html</loc><lastmod>2026-08-11</lastmod></url>
   <url><loc>https://kubaopoczka.github.io/zustand-devtools-site/privacy.html</loc><lastmod>2026-08-04</lastmod></url>

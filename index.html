@@ -474,7 +474,7 @@
   .service-price small { display: block; margin-top: 7px; color: var(--ink-faint); font: 500 11px var(--mono); }
   .service-list { margin: 18px 0; padding-left: 20px; color: var(--ink-dim); font-size: 14.5px; }
   .service-note { color: var(--ink-faint); font-size: 13px; max-width: 68ch; }
-  .resource-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
   .resource-card { color: var(--ink-dim); text-decoration: none; transition: border-color var(--t) var(--ease); }
   .resource-card:hover { border-color: var(--accent); text-decoration: none; }
   .resource-card p { margin: 0; font-size: 14px; }
@@ -851,8 +851,13 @@
       </div>
       <div>
         <h2 id="guides-h">Debug the state change, not the symptom.</h2>
-        <p class="sub">Two short field guides for teams deciding how to inspect and reproduce Zustand state bugs.</p>
+        <p class="sub">Three source-linked guides for teams deciding how to label, inspect and reproduce Zustand state bugs.</p>
         <div class="resource-grid">
+          <a class="resource-card" href="name-zustand-stores-actions.html">
+            <h3>Name Zustand stores and actions</h3>
+            <p>Turn anonymous updates into a readable timeline with stable store identities and domain-first action labels.</p>
+            <span class="read">set up readable traces →</span>
+          </a>
           <a class="resource-card" href="debug-zustand-state-changes.html">
             <h3>How to debug Zustand state changes</h3>
             <p>A repeatable workflow for multiple stores, named actions, path-level diffs and safe reproduction.</p>

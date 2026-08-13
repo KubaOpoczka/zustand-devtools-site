@@ -10,6 +10,7 @@ Privacy: https://kubaopoczka.github.io/zustand-devtools-site/privacy.html
 Terms: https://kubaopoczka.github.io/zustand-devtools-site/terms.html
 
 Guides:
+- https://kubaopoczka.github.io/zustand-devtools-site/name-zustand-stores-actions.html
 - https://kubaopoczka.github.io/zustand-devtools-site/debug-zustand-state-changes.html
 - https://kubaopoczka.github.io/zustand-devtools-site/zustand-devtools-comparison.html
 

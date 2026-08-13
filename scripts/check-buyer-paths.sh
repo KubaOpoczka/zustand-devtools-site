@@ -35,11 +35,26 @@ require_text 'Zustand%20version%3A' "$page"
 require_text 'Please%20do%20not%20include%20secrets%20or%20unredacted%20production%20state' "$page"
 reject_text 'Buy Pro · €9.99 once' "$page"
 
-for local_page in privacy.html terms.html debug-zustand-state-changes.html zustand-devtools-comparison.html; do
+for local_page in privacy.html terms.html name-zustand-stores-actions.html debug-zustand-state-changes.html zustand-devtools-comparison.html; do
   if [ ! -f "$repo_root/$local_page" ]; then
     echo "Missing linked local page: $local_page" >&2
     exit 1
   fi
 done
+
+naming_guide="$repo_root/name-zustand-stores-actions.html"
+require_text '"@type": "TechArticle"' "$naming_guide"
+require_text "'cart/addItem'" "$naming_guide"
+require_text "name: 'cart'" "$naming_guide"
+require_text 'utm_source=zustand_naming_guide' "$naming_guide"
+require_text 'utm_campaign=zustand_trace_launch' "$naming_guide"
+require_text 'founder disclosure:' "$naming_guide"
+require_text 'Kuba builds Zustand' "$naming_guide"
+reject_text 'official recommendation' "$naming_guide"
+
+require_text 'name-zustand-stores-actions.html' "$repo_root/sitemap.xml"
+require_text 'name-zustand-stores-actions.html' "$repo_root/llms.txt"
+require_text 'utm_source=zustand_comparison_guide' "$repo_root/zustand-devtools-comparison.html"
+require_text 'utm_campaign=zustand_trace_launch' "$repo_root/zustand-devtools-comparison.html"
 
 echo "Zustand buyer-path checks passed."
