@@ -20,7 +20,7 @@
   "name": "Zustand DevTools",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Chrome, Chromium",
-  "softwareVersion": "1.1.1",
+  "softwareVersion": "1.1.2",
   "description": "A Chrome DevTools panel for registered Zustand stores with live state, action timelines, safe time travel and optional Trace Sessions.",
   "url": "https://kubaopoczka.github.io/zustand-devtools-site/",
   "downloadUrl": "https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj",
@@ -468,6 +468,12 @@
     border: 1px solid var(--line); background: var(--bg-raise); border-radius: 6px;
     padding: clamp(18px, 3vw, 28px);
   }
+  .service-stack { display: grid; gap: 14px; }
+  .service-card.clinic { border-color: var(--accent); }
+  .clinic-kicker {
+    display: inline-block; margin-bottom: 12px; color: var(--accent);
+    font: 600 11px var(--mono); letter-spacing: 0.06em; text-transform: uppercase;
+  }
   .service-top { display: flex; gap: 20px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
   .service-top h3, .resource-card h3 { margin: 0 0 8px; font-size: 19px; line-height: 1.2; }
   .service-price { font: 700 24px/1 var(--sans); white-space: nowrap; }
@@ -600,7 +606,7 @@
           <dt>release</dt><dd><b>public</b></dd>
           <dt>install</dt><dd><b>Chrome Web Store</b></dd>
           <dt>price</dt><dd>€9.99 + applicable tax</dd>
-          <dt>proof</dt><dd>100 automated tests</dd>
+          <dt>proof</dt><dd>107 automated tests</dd>
           <dt>privacy</dt><dd><span class="ok">zero telemetry</span></dd>
         </dl>
       </div>
@@ -786,28 +792,43 @@
   <section id="diagnosis" aria-labelledby="diagnosis-h" class="node">
     <div class="sec">
       <div class="sec-meta">
-        <b>expert help</b>
-        €199 fixed scope<br>
-        async · no call required
+        <b>feedback cohort</b>
+        5 free spots<br>
+        open through 18 Sep
       </div>
       <div>
         <h2 id="diagnosis-h">A second pair of eyes on the state bug.</h2>
         <p class="sub">When the trace is clear but the cause is not, send one redacted Trace Session and the behavior you expected.</p>
-        <div class="service-card">
-          <div class="service-top">
-            <div>
-              <h3>Async Zustand Trace Diagnosis</h3>
-              <p class="sub">A focused review of one reproducible Zustand state bug.</p>
+        <div class="service-stack">
+          <div class="service-card clinic">
+            <span class="clinic-kicker">First five suitable bugs · no charge</span>
+            <div class="service-top">
+              <div>
+                <h3>Zustand Bug Clinic</h3>
+                <p class="sub">A short founder review in exchange for honest workflow feedback.</p>
+              </div>
+              <div class="service-price">€0<small>feedback cohort</small></div>
             </div>
-            <div class="service-price">€199<small>one diagnosis</small></div>
+            <ul class="service-list">
+              <li>One reproducible Zustand 4 or 5 bug with expected and actual behavior</li>
+              <li>One redacted Trace Session or minimal reproduction</li>
+              <li>A short written diagnosis and concrete next checks within five working days</li>
+              <li>You answer three short follow-up questions after delivery</li>
+            </ul>
+            <p class="service-note">Open through 18 September 2026 or until five suitable bugs are accepted. Do not send secrets, customer data or unredacted production state. I may separately ask to publish an anonymized case summary; saying no does not affect the review.</p>
+            <a class="btn btn-primary" href="mailto:kuba.opoczka@gmail.com?subject=Zustand%20Bug%20Clinic%20%5Bproduct-site%5D&amp;body=Zustand%20version%3A%0A%0AReact%20version%3A%0A%0ANumber%20of%20stores%3A%0A%0AExpected%20behavior%3A%0A%0AActual%20behavior%3A%0A%0AMinimal%20reproduction%20link%3A%0A%0ARedacted%20Trace%20Session%20available%3A%20yes%2Fno%0A%0AI%20can%20answer%203%20short%20follow-up%20questions%3A%20yes%2Fno%0A%0APlease%20do%20not%20include%20secrets%2C%20customer%20data%20or%20unredacted%20production%20state.%0A">Submit a bug for the free clinic</a>
           </div>
-          <ul class="service-list">
-            <li>Review of one redacted Trace Session plus expected and actual behavior</li>
-            <li>Annotated change path and best-effort call-site review</li>
-            <li>Written diagnosis, likely causes and concrete next checks within three working days</li>
-          </ul>
-          <p class="service-note">Check fit with the brief first. Do not email secrets or unredacted production state. If the trace is not sufficient to perform the review, the engagement does not start. No payment is due until scope is confirmed in writing.</p>
-          <a class="btn btn-primary" href="mailto:kuba.opoczka@gmail.com?subject=Async%20Zustand%20Trace%20Diagnosis%20%5Bproduct-site%5D&amp;body=Zustand%20version%3A%0A%0AReact%20version%3A%0A%0ANumber%20of%20stores%3A%0A%0AExpected%20behavior%3A%0A%0AActual%20behavior%3A%0A%0AMinimal%20reproduction%3A%0A%0ARedacted%20Trace%20Session%20available%3A%20yes%2Fno%0A%0ADeadline%20(if%20any)%3A%0A%0APlease%20do%20not%20include%20secrets%20or%20unredacted%20production%20state.%0A">Check fit — no payment yet</a>
+          <div class="service-card">
+            <div class="service-top">
+              <div>
+                <h3>Async Zustand Trace Diagnosis</h3>
+                <p class="sub">The established paid route remains available outside the feedback cohort.</p>
+              </div>
+              <div class="service-price">€199<small>one diagnosis</small></div>
+            </div>
+            <p class="service-note">One reproducible bug, an annotated change path, likely causes and next checks within three working days. Scope and payment are confirmed in writing before the engagement starts.</p>
+            <a class="btn" href="mailto:kuba.opoczka@gmail.com?subject=Async%20Zustand%20Trace%20Diagnosis%20%5Bproduct-site%5D&amp;body=Zustand%20version%3A%0A%0AReact%20version%3A%0A%0ANumber%20of%20stores%3A%0A%0AExpected%20behavior%3A%0A%0AActual%20behavior%3A%0A%0AMinimal%20reproduction%3A%0A%0ARedacted%20Trace%20Session%20available%3A%20yes%2Fno%0A%0ADeadline%20(if%20any)%3A%0A%0APlease%20do%20not%20include%20secrets%20or%20unredacted%20production%20state.%0A">Check paid diagnosis fit</a>
+          </div>
         </div>
       </div>
     </div>
@@ -825,7 +846,7 @@
           <div class="step">
             <p><b>Install the extension</b> from the
             <a href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Chrome Web Store</a>,
-            then add <a href="https://www.npmjs.com/package/zustand-devtools-bridge" target="_blank" rel="noopener"><code>zustand-devtools-bridge</code> 0.2.0</a>
+            then add <a href="https://www.npmjs.com/package/zustand-devtools-bridge" target="_blank" rel="noopener"><code>zustand-devtools-bridge</code> 0.2.1</a>
             to the app. Wrap each store you want to inspect and give it a stable name.</p>
           </div>
           <div class="step">
@@ -894,7 +915,7 @@
             using React 16.8+ with Zustand 4 or 5. Accurate store inspection uses the
             one-line <code>zustand-devtools-bridge</code> wrapper per store; the experimental
             Component Hooks view is zero-setup but not guaranteed to show Zustand state.
-            Install bridge 0.2.0 from
+            Install bridge 0.2.1 from
             <a href="https://www.npmjs.com/package/zustand-devtools-bridge" target="_blank" rel="noopener">npm</a>.
             The <a href="https://github.com/KubaOpoczka/zustand-devtools#install" target="_blank" rel="noopener">repository README</a>
             includes the setup example.</p>
@@ -952,7 +973,7 @@
     </nav>
     <div class="foot-meta">
       <span>© 2026 Kuba Opoczka · Zustand DevTools</span>
-      <span>extension 1.1.1 / bridge 0.2.0</span>
+      <span>extension 1.1.2 / bridge 0.2.1</span>
       <span>no analytics, no telemetry</span>
       <span>not affiliated with the Zustand or pmndrs projects</span>
     </div>
