@@ -15,3 +15,5 @@ Guides:
 - https://kubaopoczka.github.io/zustand-devtools-site/zustand-devtools-comparison.html
 
 The product is not affiliated with Zustand or pmndrs. It does not claim that best-effort call-sites prove causality. No analytics or telemetry are built into the extension.
+
+- [Real cart debugging sample](https://kubaopoczka.github.io/zustand-devtools-site/try-zustand.html): two real registered Zustand stores with an intentional discount bug; no setup beyond installing the extension.
