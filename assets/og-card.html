@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Zustand DevTools social card source</title>
+<style>
+  @font-face { font-family: Bricolage; src: url('../fonts/BricolageGrotesque-var.woff2') format('woff2'); font-weight: 200 800; }
+  @font-face { font-family: JetBrains; src: url('../fonts/JetBrainsMono-var.woff2') format('woff2'); font-weight: 100 800; }
+  :root { --bg:#0d0b1f; --surface:#17132f; --rule:#3d3762; --ink:#f8f7fc; --dim:#d7d3e4; --accent:#a89cff; --solid:#4f46e5; }
+  * { box-sizing: border-box; }
+  html, body { width:1200px; height:630px; margin:0; overflow:hidden; }
+  body { background:var(--bg); color:var(--ink); font-family:Bricolage,sans-serif; }
+  .card { position:relative; width:100%; height:100%; padding:54px 70px; }
+  .top { display:flex; align-items:center; gap:15px; }
+  .mark { width:42px; height:42px; display:grid; place-items:center; background:var(--solid); border-radius:10px; font:700 25px Bricolage,sans-serif; }
+  .brand { font:600 20px Bricolage,sans-serif; }
+  .brand span { color:var(--dim); font-weight:400; }
+  .label { margin:55px 0 20px; color:var(--accent); font:600 14px JetBrains,monospace; letter-spacing:.12em; }
+  h1 { margin:0; font:650 106px/.86 Bricolage,sans-serif; letter-spacing:-.075em; }
+  h1 span { display:block; }
+  h1 span:last-child { color:var(--accent); }
+  .change { position:absolute; right:70px; top:215px; width:260px; padding:22px 20px; border-left:2px solid var(--accent); background:var(--surface); font:500 16px/1.8 JetBrains,monospace; }
+  .change .path { color:var(--dim); font-size:12px; }
+  .change .before { color:var(--dim); }
+  .change .arrow { color:var(--accent); padding:0 12px; }
+  .bottom { position:absolute; left:70px; right:70px; bottom:45px; display:flex; justify-content:space-between; gap:30px; align-items:center; border-top:1px solid var(--rule); padding-top:20px; color:var(--dim); font:500 14px JetBrains,monospace; }
+  .bottom b { color:var(--accent); font-weight:600; }
+</style>
+<div class="card">
+  <div class="top"><div class="mark">Z</div><div class="brand">Zustand <span>DevTools</span></div></div>
+  <p class="label">CHROME DEVTOOLS, WITH CONTEXT</p>
+  <h1><span>State changes.</span><span>Explained.</span></h1>
+  <div class="change"><div class="path">cart.items[1].quantity</div><span class="before">1</span><span class="arrow">→</span><span>2</span></div>
+  <div class="bottom"><span>Live stores. Action timeline. Safe time travel.</span><b>Free in Chrome ↗</b></div>
+</div>
+</html>

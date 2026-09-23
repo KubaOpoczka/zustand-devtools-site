@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zustand DevTools — inspect your stores, understand every action</title>
-<meta name="description" content="Inspect Zustand stores, follow actions and safely revisit state in Chrome DevTools. Free store inspector and timeline, with optional Pro Trace Sessions.">
-<meta property="og:title" content="Zustand DevTools — inspect your stores, understand every action">
-<meta property="og:description" content="Inspect Zustand stores, follow actions and safely revisit state in Chrome DevTools. Free store inspector and timeline, with optional Pro Trace Sessions.">
+<title>Zustand DevTools — State changes. Explained.</title>
+<meta name="description" content="See live Zustand stores, follow every action, revisit earlier state and trace the moment a bug began. Free Stores and Timeline in Chrome DevTools.">
+<meta property="og:title" content="Zustand DevTools — State changes. Explained.">
+<meta property="og:description" content="See live Zustand stores, follow every action, revisit earlier state and trace the moment a bug began. Free Stores and Timeline in Chrome DevTools.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kubaopoczka.github.io/zustand-devtools-site/">
 <meta property="og:image" content="https://kubaopoczka.github.io/zustand-devtools-site/og.png">
 <meta name="theme-color" content="#0d0b1f">
 <link rel="canonical" href="https://kubaopoczka.github.io/zustand-devtools-site/">
+<link rel="preload" href="fonts/BricolageGrotesque-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-size='18' font-weight='800' fill='%23ffffff' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <script type="application/ld+json">
 {
@@ -32,6 +33,12 @@
 }
 </script>
 <style>
+  @font-face {
+    font-family: "Bricolage Grotesque";
+    src: url("fonts/BricolageGrotesque-var.woff2") format("woff2");
+    font-weight: 200 800;
+    font-display: swap;
+  }
   /* Self-hosted, SIL OFL licensed (see fonts/OFL-*.txt). No third-party requests. */
   @font-face {
     font-family: "JetBrains Mono";
@@ -565,6 +572,259 @@
     .setup-code { padding: 14px; font-size: 11.5px; }
   }
   @media (max-width: 700px) { section[id] { scroll-margin-top: 12px; } }
+
+  /* Hallmark · pre-emit critique: P4 H5 E4 S5 R4 V4
+     Marketing shape: monumental statement → interactive workbench → varied chapters.
+     The violet signal marks a changed state; the rest stays deliberately quiet. */
+  :root {
+    --display: "Bricolage Grotesque", "Helvetica Neue", sans-serif;
+    --stage: #17132f;
+    --stage-strong: #211a47;
+    --stage-deep: #100d24;
+    --accent-line: #6659ad;
+    --signal-shadow: rgba(111, 91, 233, 0.22);
+    --shadow: 0 35px 90px rgba(6, 5, 20, 0.42);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .wrap { max-width: 1440px; padding-inline: clamp(18px, 4vw, 64px); }
+  header { min-height: 76px; border-bottom-color: var(--line); }
+  .wordmark { font: 650 18px/1 var(--display); letter-spacing: -0.025em; }
+  .wordmark span { font-weight: 450; }
+  header nav a { font-size: 13px; letter-spacing: 0.005em; }
+  header nav a:first-child { color: var(--ink); }
+  .mark { border-radius: 8px; }
+
+  .hero { padding: clamp(56px, 5vw, 76px) 0 88px; }
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.65fr);
+    align-items: end; gap: clamp(30px, 4vw, 76px);
+  }
+  .hero-eyebrow, .demo-kicker {
+    font: 600 11px/1.5 var(--mono); letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .hero-eyebrow { margin: 0 0 24px; }
+  .hero-eyebrow span { margin-inline: 10px; color: var(--ink-faint); }
+  h1 {
+    font: 650 clamp(4.3rem, 7.1vw, 8.1rem)/0.89 var(--display);
+    letter-spacing: -0.07em; max-width: none; margin: 0;
+    text-wrap: nowrap;
+  }
+  h1 span, h1 em { display: block; font-style: normal; }
+  h1 em { color: var(--accent); }
+  .hero-side { padding-bottom: 6px; max-width: 440px; }
+  .hero .lede {
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    line-height: 1.48; max-width: 36ch; margin: 0 0 26px;
+    color: var(--ink-dim);
+  }
+  .hero .cta-row { display: grid; grid-template-columns: 1fr; gap: 10px; align-items: stretch; }
+  .hero .btn { justify-content: space-between; min-height: 48px; padding: 12px 19px; }
+  .hero .btn-primary { box-shadow: 0 6px 18px var(--signal-shadow); }
+  .hero .btn-ghost { border-color: var(--line); font-family: var(--sans); font-size: 14px; }
+  .hero .cta-note { margin: 15px 0 0; line-height: 1.7; font-size: 11px; }
+
+  .demo-intro {
+    margin: clamp(52px, 5vw, 72px) 0 20px;
+    padding-top: 16px; border-top: 1px solid var(--line);
+    align-items: end;
+  }
+  .demo-intro h2 { font: 620 clamp(1.55rem, 2.8vw, 2.45rem)/1.05 var(--display); letter-spacing: -0.04em; margin-top: 7px; }
+  .demo-intro p { max-width: 28ch; font: 500 12px/1.5 var(--mono); }
+  .demo {
+    position: relative; isolation: isolate;
+    grid-template-columns: minmax(300px, 0.76fr) minmax(0, 1.24fr);
+    gap: 0; min-height: 572px;
+    padding: clamp(18px, 3vw, 36px);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--stage);
+    filter: none; box-shadow: var(--shadow);
+  }
+  .demo .win { background: var(--stage-deep); border-color: var(--line); border-radius: 13px; }
+  .demo > .win:first-child {
+    margin: 58px -26px 45px 0; z-index: 2;
+    box-shadow: 16px 22px 52px rgba(4, 3, 15, 0.38);
+  }
+  .demo > .dt { z-index: 1; box-shadow: 0 0 0 1px var(--line-soft); }
+  .win-bar {
+    padding: 13px 18px; min-height: 46px; justify-content: space-between;
+    color: var(--ink-dim); font-size: 10.5px; letter-spacing: 0.08em;
+  }
+  .surface-context { font-weight: 400; letter-spacing: 0; color: var(--ink-faint); text-transform: none; }
+  .signal-bridge {
+    position: absolute; z-index: 4; left: 34.5%; top: 46%;
+    padding: 8px 10px; transform: translate(-50%, -50%);
+    border: 1px solid var(--accent-line); border-radius: 4px;
+    background: var(--stage-strong); color: var(--accent);
+    box-shadow: 0 10px 32px var(--signal-shadow);
+    font: 600 10px/1 var(--mono); letter-spacing: 0.025em;
+    white-space: nowrap;
+  }
+  .app-body { padding: 20px; gap: 14px; }
+  .app-head .shop { font: 650 23px/1.05 var(--display); letter-spacing: -0.035em; }
+  .product { min-width: 0; padding: 14px; border-color: var(--line-soft); }
+  .product .p-name { font-size: 14px; }
+  .product button, .app-actions button { min-height: 44px; }
+  .cart-line { padding-top: 18px; font-size: 13px; }
+  .dt-tabs { padding-inline: 12px; }
+  .dt-tabs span { padding: 12px 13px; }
+  .dt-status { padding: 10px 20px; color: var(--ink-dim); }
+  .dt-sec { padding: 15px 20px 18px; }
+  .dt-label { color: var(--accent); margin-bottom: 12px; }
+  .dt-row { font-size: 12.5px; line-height: 1.75; }
+  .dt-store { margin-bottom: 13px; }
+  #dt-log { max-height: 265px; gap: 0; }
+  .log-entry { border: 0; border-top: 1px solid var(--line-soft); border-radius: 0; background: transparent; padding: 9px 0; }
+  .log-entry:hover, .log-entry:focus-visible { background: var(--stage-strong); }
+  .log-action { color: var(--ink); }
+  .log-diff { font-size: 11px; }
+  .demo-hint { padding: 0 20px 15px; line-height: 1.5; }
+  .demo.signal .dt { animation: panel-signal 650ms var(--ease); }
+  @keyframes panel-signal {
+    0% { border-color: var(--line); box-shadow: 0 0 0 0 var(--signal-shadow); }
+    38% { border-color: var(--accent); box-shadow: 0 0 0 5px var(--signal-shadow); }
+    100% { border-color: var(--line); box-shadow: 0 0 0 0 var(--signal-shadow); }
+  }
+  .hero-after {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px;
+    align-items: baseline; margin-top: 22px;
+    font: 500 12px/1.6 var(--mono); color: var(--ink-faint);
+  }
+  .hero-after > a { color: var(--ink); text-decoration: none; font-weight: 600; }
+  .hero-after > a:hover { color: var(--accent); }
+  .hero-after p { margin: 0; }
+  .hero-after .ecosystem-note { grid-column: 1 / -1; font: inherit; margin-top: 4px; }
+
+  main > section:not(.hero) { border: 0; padding: clamp(104px, 11vw, 174px) 0; }
+  main > section:not(.hero) + section:not(.hero) { border-top: 1px solid var(--line-soft); }
+  h2 { font: 630 clamp(3.15rem, 5.4vw, 5.9rem)/0.98 var(--display); letter-spacing: -0.058em; max-width: 14ch; }
+  .sub { font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.55; max-width: 55ch; }
+  .feature-rows { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3.5vw, 54px); margin-top: 68px; }
+  .frow { display: block; border-top: 1px solid var(--accent-line); padding-top: 22px; }
+  .frow:last-child { border-bottom: 0; }
+  .frow dt { font-size: 11px; letter-spacing: 0.04em; margin-bottom: 20px; }
+  .frow dd { font-size: 15.5px; line-height: 1.65; }
+  .frow dd b { display: block; font: 600 clamp(1.35rem, 2vw, 1.8rem)/1.14 var(--display); letter-spacing: -0.025em; margin-bottom: 15px; }
+
+  #setup .sec > div:last-child { max-width: none; display: grid; grid-template-columns: minmax(230px, 0.7fr) minmax(0, 1.3fr); column-gap: clamp(40px, 7vw, 110px); align-items: start; }
+  #setup h2 { grid-column: 1; grid-row: 1 / span 4; max-width: 10ch; position: sticky; top: 108px; }
+  #setup .steps, #setup-feedback, #setup .setup-help { grid-column: 2; }
+  #setup .steps { max-width: none; }
+  #setup .step { padding-block: 24px; }
+  #setup .step:first-child { border-top-color: var(--accent-line); }
+  #setup .step p { font-size: 16px; }
+  #setup .step p b { color: var(--ink); }
+  .setup-code { background: var(--stage-deep); border-color: var(--line); }
+  #setup .setup-copy { font-family: var(--mono); }
+
+  #pricing { position: relative; isolation: isolate; }
+  #pricing::before {
+    content: ""; position: absolute; z-index: -1; inset-block: 0;
+    left: 50%; width: 100vw; transform: translateX(-50%);
+    background: var(--stage);
+  }
+  #pricing h2 { font-size: clamp(4.2rem, 6.8vw, 7rem); }
+  #pricing .sub { margin-bottom: 50px; }
+  #pricing .scrub { background: var(--stage-deep); border-color: var(--accent-line); border-radius: 16px; }
+  #pricing .scrub-body { min-height: 245px; padding: clamp(22px, 3vw, 40px); gap: 20px; }
+  #pricing .sr-action .name { font-size: 20px; }
+  #pricing .sr-diff { font-size: 13px; }
+  #pricing .sc-state { gap: 12px 38px; padding-top: 20px; }
+  #pricing .paid-grid { gap: clamp(38px, 6vw, 90px); }
+  #pricing .code-card { background: var(--stage-deep); padding: 25px; border-color: var(--line); }
+  #pricing .price-block { padding-left: clamp(20px, 3vw, 42px); border-left: 1px solid var(--accent-line); }
+  #pricing .price-line .p { font: 620 clamp(3.8rem, 6vw, 6rem)/0.9 var(--display); letter-spacing: -0.06em; }
+
+  #diagnosis h2, #guides h2, #faq h2 { font-size: clamp(2.8rem, 4.5vw, 4.4rem); }
+  #diagnosis .service-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  #diagnosis .service-card { background: transparent; border-color: var(--line); min-height: 100%; }
+  #diagnosis .clinic .btn { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  #guides .resource-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 52px; border-top: 1px solid var(--accent-line); }
+  #guides .resource-card { background: transparent; border: 0; border-right: 1px solid var(--line-soft); border-radius: 0; padding: 28px clamp(22px, 3vw, 40px); }
+  #guides .resource-card:first-child { padding-left: 0; }
+  #guides .resource-card:last-child { border-right: 0; }
+  #guides .resource-card:hover { background: var(--stage); }
+  #guides .resource-card h3 { font: 600 clamp(1.45rem, 2vw, 1.9rem)/1.12 var(--display); letter-spacing: -0.035em; }
+  #faq .faq { max-width: 900px; }
+  #faq .faq summary { font: 580 clamp(1.05rem, 1.7vw, 1.3rem)/1.3 var(--display); padding-block: 21px; }
+  footer { padding-top: 65px; }
+  .footer-statement { font: 620 clamp(3.2rem, 7vw, 7rem)/0.96 var(--display); letter-spacing: -0.06em; margin: 0 0 65px; max-width: 13ch; }
+  .footer-statement em { color: var(--accent); font-style: normal; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-eyebrow, .hero h1 span, .hero h1 em, .hero-side, .demo-intro, .hero .demo {
+      animation: arrive 720ms var(--ease) both;
+    }
+    .hero h1 span { animation-delay: 90ms; }
+    .hero h1 em { animation-delay: 170ms; }
+    .hero-side { animation-delay: 280ms; }
+    .demo-intro { animation-delay: 370ms; }
+    .hero .demo { animation-delay: 440ms; }
+  }
+  @keyframes arrive { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+  @media (max-width: 1050px) {
+    .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(290px, .75fr); }
+    h1 { font-size: clamp(4.1rem, 7.2vw, 6.8rem); }
+    .demo { grid-template-columns: minmax(270px, .83fr) minmax(0, 1.17fr); }
+    .signal-bridge { left: 41%; }
+  }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+    .hero-side { max-width: 640px; }
+    .hero .cta-row { display: flex; flex-wrap: wrap; }
+    .hero .btn { min-width: 220px; }
+    .demo { grid-template-columns: 1fr; min-height: 0; gap: 14px; }
+    .demo > .win:first-child, .demo > .dt { margin: 0; }
+    .signal-bridge { display: none; }
+    .feature-rows { grid-template-columns: 1fr; gap: 0; }
+    .frow { display: grid; grid-template-columns: minmax(140px, .35fr) minmax(0, 1fr); gap: 28px; padding-block: 24px; }
+    .frow dt { margin-bottom: 0; }
+    #setup .sec > div:last-child { grid-template-columns: 1fr; }
+    #setup h2, #setup .steps, #setup-feedback, #setup .setup-help { grid-column: 1; }
+    #setup h2 { position: static; grid-row: auto; max-width: 14ch; }
+    #setup .steps { margin-top: 28px; }
+    #diagnosis .service-stack { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    header { padding-block: 18px 12px; }
+    .hero { padding-top: 42px; padding-bottom: 60px; }
+    h1 { font-size: clamp(3rem, 11vw, 4.8rem); line-height: .93; letter-spacing: -0.063em; }
+    .hero .lede { font-size: 18px; max-width: 44ch; }
+    .demo-intro { margin-top: 42px; }
+    .hero-after { grid-template-columns: 1fr; }
+    .hero-after .ecosystem-note { grid-column: 1; }
+    .feature-rows { grid-template-columns: 1fr; gap: 0; margin-top: 48px; }
+    .frow { display: block; padding-block: 24px; }
+    .frow dt { margin-bottom: 20px; }
+    .frow:last-child { border-top: 1px solid var(--accent-line); }
+    #guides .resource-grid { grid-template-columns: 1fr; }
+    #guides .resource-card, #guides .resource-card:first-child { padding: 24px 0; border-right: 0; border-bottom: 1px solid var(--line-soft); }
+    #pricing .price-block { padding-left: 0; border-left: 0; border-top: 1px solid var(--accent-line); padding-top: 30px; }
+    .footer-statement { margin-bottom: 40px; }
+  }
+  @media (max-width: 560px) {
+    .hero h1 { font-size: clamp(2.75rem, 10.9vw, 3.8rem); }
+    .hero .cta-row { display: grid; }
+    .hero .btn { width: 100%; }
+    .demo { padding: 12px; border-radius: 14px; }
+    .app-body { padding: 14px; }
+    .dt-sec { padding: 13px 14px; }
+    .dt-status { padding-inline: 14px; }
+    .demo-hint { padding-inline: 14px; }
+    .win-bar { padding-inline: 14px; font-size: 10px; }
+    .surface-context { display: none; }
+    main > section:not(.hero) { padding-block: 90px; }
+  }
+  @media (max-width: 375px) {
+    h1 { overflow-wrap: anywhere; }
+    .hero h1 { font-size: 10.4vw; }
+    .hero-eyebrow { font-size: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .demo.signal .dt, .hero-eyebrow, .hero h1 span, .hero h1 em, .hero-side, .demo-intro, .hero .demo { animation: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -576,10 +836,10 @@
     <div class="mark" aria-hidden="true">Z</div>
     <div class="wordmark">Zustand <span>DevTools</span></div>
     <nav aria-label="Main">
+      <a href="#demo">Demo</a>
       <a href="#setup">Setup</a>
       <a href="#pricing">Pricing</a>
       <a href="#guides">Guides</a>
-      <a href="#faq">FAQ</a>
       <a class="gh-link" href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">GitHub</a>
     </nav>
   </header>
@@ -587,47 +847,31 @@
   <main id="main">
   <section class="hero node node-hot" style="border-top: none;">
     <div class="hero-grid">
-      <div>
-        <h1>Understand what changed in your <em>Zustand store.</em></h1>
-        <p class="lede">
-          See live state, follow actions across stores and safely revisit an earlier
-          state. Your everyday debugger is free. Trace Sessions add deeper investigation
-          when a bug needs a closer look.
-        </p>
+      <div class="hero-title-block">
+        <p class="hero-eyebrow">Zustand DevTools <span aria-hidden="true">/</span> Chrome extension</p>
+        <h1><span>State changes.</span><em>Explained.</em></h1>
+      </div>
+      <div class="hero-side">
+        <p class="lede">Inspect live Zustand stores. Follow every action, revisit earlier state, and trace the moment a bug began.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj" target="_blank" rel="noopener">Add to Chrome — free</a>
-          <a class="btn btn-ghost" href="try-zustand.html">Try it on a real cart bug</a>
+          <a class="btn btn-ghost" href="#demo">Explore the live demo <span aria-hidden="true">↗</span></a>
         </div>
         <p class="cta-note">Free Stores + Timeline · local state · no account required</p>
-        <p class="cta-note">One bridge wrapper per store. <a href="#setup">See the setup</a>, or try the ready-to-inspect sample app.</p>
-        <p class="ecosystem-note">
-          <a href="https://zustand.docs.pmnd.rs/reference/integrations/third-party-libraries" target="_blank" rel="noopener">Listed on Zustand's third-party libraries page</a>
-          <small>· community listing, not an official recommendation</small>
-        </p>
-      </div>
-      <div class="readout" role="group" aria-label="Included in Zustand DevTools">
-        <p class="readout-head">Inside your DevTools</p>
-        <dl>
-          <dt>inspect</dt><dd><b>Live store state</b></dd>
-          <dt>follow</dt><dd>Actions across stores</dd>
-          <dt>revisit</dt><dd>Safe time travel</dd>
-          <dt>investigate</dt><dd>3 Pro traces to try</dd>
-          <dt>privacy</dt><dd><span class="ok">zero telemetry</span></dd>
-        </dl>
       </div>
     </div>
 
     <div class="demo-intro">
       <div>
-        <span class="demo-kicker">Interactive preview</span>
-        <h2>See the state change as you use the app.</h2>
+        <span class="demo-kicker">The product, in motion</span>
+        <h2>One action. The exact path that changed.</h2>
       </div>
-      <p>Try adding an item or toggling login. The panel beside the app updates immediately.</p>
+      <p>Click a cart action. The inspection panel responds to the app.</p>
     </div>
 
     <div class="demo" id="demo">
       <div class="win" role="group" aria-label="A small demo storefront app">
-        <div class="win-bar"><span>app</span><span class="addr">localhost:3000</span></div>
+        <div class="win-bar"><span>01 / SAMPLE APP</span><span class="surface-context">two connected stores</span></div>
         <div class="app-body">
           <div class="app-head">
             <span class="shop">Relay Supply</span>
@@ -649,16 +893,18 @@
           </div>
           <div class="cart-line"><span>cart total</span><span class="amt" id="app-total">€0</span></div>
         </div>
-        <p class="demo-hint">The app: a plain storefront with two Zustand stores</p>
+        <p class="demo-hint">Make a change here <span aria-hidden="true">→</span></p>
       </div>
 
+      <div class="signal-bridge" aria-hidden="true"><span>action → state</span></div>
+
       <div class="win dt" role="group" aria-label="Simulation of the Zustand DevTools panel">
-        <div class="win-bar"><span>DevTools</span><span class="addr">Zustand</span></div>
+        <div class="win-bar"><span>02 / ZUSTAND DEVTOOLS</span><span class="surface-context">live inspection</span></div>
         <div class="dt-tabs">
           <span class="on">Stores</span><span>Timeline</span>
           <span class="dt-live"><i aria-hidden="true"></i>connected</span>
         </div>
-        <div class="dt-status">React 18.3.1 detected. Live state below.</div>
+        <div class="dt-status">Connected to the sample app. Live state below.</div>
         <div class="dt-body">
           <div class="dt-sec">
             <p class="dt-label">Stores</p>
@@ -677,8 +923,13 @@
             <div id="dt-log" role="region" aria-label="Timeline entries" tabindex="0"></div>
           </div>
         </div>
-        <p class="demo-hint"><b>Interactive product illustration.</b> A simulation of the panel wired to the app beside it, not an extension screenshot. <b>Try it:</b> add the keyboard again and watch the <b>items[1].quantity</b> path appear.</p>
+        <p class="demo-hint"><b>Interactive product illustration.</b> This simulates the panel; it is not an extension screenshot. Add the keyboard again to reveal <b>items[1].quantity</b>.</p>
       </div>
+    </div>
+    <div class="hero-after">
+      <a href="try-zustand.html">Try the real cart bug in Chrome <span aria-hidden="true">↗</span></a>
+      <p><a href="#setup">One bridge wrapper per store</a> · 3 Pro Trace Sessions to try · zero telemetry</p>
+      <p class="ecosystem-note"><a href="https://zustand.docs.pmnd.rs/reference/integrations/third-party-libraries" target="_blank" rel="noopener">Listed on Zustand's third-party libraries page</a> <small>· community listing, not an official recommendation</small></p>
     </div>
     <div class="visually-hidden" role="status" id="demo-announce"></div>
   </section>
@@ -691,22 +942,22 @@
         one line per store
       </div>
       <div>
-        <h2 id="free-h">Accurate stores, timeline, safe time travel.</h2>
+        <h2 id="free-h">The whole store. Every action.</h2>
         <p class="sub">
-          Register each store once for accurate inspection, searchable history and safe
-          ID-based time travel. The experimental zero-setup view stays clearly labelled.
+          Register a store once for accurate live state, searchable history and safe
+          ID-based time travel. The zero-setup Component Hooks view stays experimental.
         </p>
         <dl class="feature-rows">
           <div class="frow">
-            <dt>one_line_setup</dt>
+            <dt>ONE WRAPPER</dt>
             <dd><b>Register a store once, inspect it from then on.</b> <code>withDevtoolsBridge(creator, { name: 'cart' })</code> gives you an accurate live view per store, plus the zero-setup experimental hooks view for quick looks.</dd>
           </div>
           <div class="frow">
-            <dt>plays_nice</dt>
+            <dt>NO CONFLICT</dt>
             <dd><b>Chains the DevTools hook instead of clobbering it.</b> The real React DevTools keeps working next to it, whichever loads first.</dd>
           </div>
           <div class="frow">
-            <dt>stays_local</dt>
+            <dt>STAYS LOCAL</dt>
             <dd><b>State never leaves your machine.</b> Data flows from the inspected page to your own panel and nowhere else: no server, no analytics, no telemetry.</dd>
           </div>
         </dl>
@@ -769,7 +1020,7 @@ export const useCounter = create(withDevtoolsBridge(
         </p>
 
         <div class="win scrub" id="scrub" role="group" aria-label="Interactive illustration of a recorded Trace Session">
-          <div class="win-bar"><span>DevTools</span><span class="addr">Zustand / Trace Session</span><span style="margin-left:auto;">recorded session / 6 steps</span></div>
+          <div class="win-bar"><span>03 / TRACE SESSION</span><span class="surface-context">recorded bug · 6 steps</span></div>
           <div class="scrub-body">
             <div class="sr-action">
               <span class="log-store" id="sc-store">[cart]</span>
@@ -860,7 +1111,7 @@ export const useCounter = create(withDevtoolsBridge(
               <li>You answer three short follow-up questions after delivery</li>
             </ul>
             <p class="service-note">The submission deadline was 18 September 2026. Ask about future availability; a new cohort has not been announced. Do not send secrets, customer data or unredacted production state. I may separately ask to publish an anonymized case summary; saying no does not affect the review.</p>
-            <a class="btn btn-primary" href="mailto:kuba.opoczka@gmail.com?subject=Zustand%20Bug%20Clinic%20%5Bproduct-site%5D&amp;body=Zustand%20version%3A%0A%0AReact%20version%3A%0A%0ANumber%20of%20stores%3A%0A%0AExpected%20behavior%3A%0A%0AActual%20behavior%3A%0A%0AMinimal%20reproduction%20link%3A%0A%0ARedacted%20Trace%20Session%20available%3A%20yes%2Fno%0A%0AI%20can%20answer%203%20short%20follow-up%20questions%3A%20yes%2Fno%0A%0APlease%20do%20not%20include%20secrets%2C%20customer%20data%20or%20unredacted%20production%20state.%0A">Ask about a future clinic</a>
+            <a class="btn btn-ghost" href="mailto:kuba.opoczka@gmail.com?subject=Zustand%20Bug%20Clinic%20%5Bproduct-site%5D&amp;body=Zustand%20version%3A%0A%0AReact%20version%3A%0A%0ANumber%20of%20stores%3A%0A%0AExpected%20behavior%3A%0A%0AActual%20behavior%3A%0A%0AMinimal%20reproduction%20link%3A%0A%0ARedacted%20Trace%20Session%20available%3A%20yes%2Fno%0A%0AI%20can%20answer%203%20short%20follow-up%20questions%3A%20yes%2Fno%0A%0APlease%20do%20not%20include%20secrets%2C%20customer%20data%20or%20unredacted%20production%20state.%0A">Ask about a future clinic</a>
           </div>
           <div class="service-card">
             <div class="service-top">
@@ -975,6 +1226,7 @@ export const useCounter = create(withDevtoolsBridge(
   </main>
 
   <footer>
+    <p class="footer-statement">Find the change.<br><em>Fix the cause.</em></p>
     <nav class="foot-links" aria-label="Footer">
       <a href="https://github.com/KubaOpoczka/zustand-devtools" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.npmjs.com/package/zustand-devtools-bridge" target="_blank" rel="noopener">npm</a>
@@ -1033,7 +1285,8 @@ export const useCounter = create(withDevtoolsBridge(
     log: document.getElementById("dt-log"),
     appTotal: document.getElementById("app-total"),
     appUserStatus: document.getElementById("app-user-status"),
-    announce: document.getElementById("demo-announce")
+    announce: document.getElementById("demo-announce"),
+    stage: document.getElementById("demo")
   };
 
   function fmtVal(v) {
@@ -1047,6 +1300,16 @@ export const useCounter = create(withDevtoolsBridge(
     node.classList.remove("bump");
     void node.offsetWidth;
     node.classList.add("bump");
+  }
+
+  var signalTimer;
+  function signalStage() {
+    if (reduced) return;
+    el.stage.classList.remove("signal");
+    void el.stage.offsetWidth;
+    el.stage.classList.add("signal");
+    clearTimeout(signalTimer);
+    signalTimer = setTimeout(function () { el.stage.classList.remove("signal"); }, 650);
   }
 
   function esc(s) {
@@ -1131,6 +1394,7 @@ export const useCounter = create(withDevtoolsBridge(
       state = JSON.parse(JSON.stringify(snapCopy));
       render(["items", "total", "logged"]);
       logAction("panel", "time-travel", null, true);
+      signalStage();
       el.announce.textContent = "Time-travelled to the state after " + action + ".";
       isUserAction = false;
     });
@@ -1149,6 +1413,7 @@ export const useCounter = create(withDevtoolsBridge(
   function userDispatch(store, action, mutate, changed) {
     isUserAction = true;
     dispatch(store, action, mutate, changed);
+    signalStage();
     isUserAction = false;
   }
 
