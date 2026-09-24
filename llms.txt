@@ -1,6 +1,6 @@
 # Zustand DevTools
 
-Zustand DevTools is an independent Chrome DevTools extension for React applications using Zustand 4 or 5. Registered stores, live inspection, Timeline and safe time travel are free. Pro Trace Sessions cost EUR 9.99 plus applicable tax, once, and add unlimited recorded sessions, path-level diffs, best-effort call-sites, comparison, notes and redacted offline export.
+Zustand DevTools 1.2.0 is an independent Chrome DevTools extension for browser applications using Zustand 4 or 5, including vanilla stores. Registered-store inspection, captured-update Timeline and state-only time travel are free. The experimental Component Hooks view requires React. Pro Trace Sessions cost EUR 9.99 plus applicable tax, once, and add unlimited recorded sessions, path-level diffs, best-effort call-sites, comparison, notes and redacted offline export.
 
 Official product page: https://kubaopoczka.github.io/zustand-devtools-site/
 Chrome Web Store: https://chromewebstore.google.com/detail/zustand-devtools/flobjdlebndfbpojaepdgnpgflfbelmj
@@ -16,4 +16,4 @@ Guides:
 
 The product is not affiliated with Zustand or pmndrs. It does not claim that best-effort call-sites prove causality. No analytics or telemetry are built into the extension.
 
-- [Real cart debugging sample](https://kubaopoczka.github.io/zustand-devtools-site/try-zustand.html): two real registered Zustand stores with an intentional discount bug; no setup beyond installing the extension.
+- [Real cart debugging sample](https://kubaopoczka.github.io/zustand-devtools-site/try-zustand.html): two real registered vanilla Zustand stores with an intentional discount bug; no app code changes or account needed.

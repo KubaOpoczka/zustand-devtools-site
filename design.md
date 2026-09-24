@@ -35,6 +35,9 @@ precision: the page makes one state transition feel visible and understandable.
   targets. Reduced-motion users see the full page without reveal dependencies.
 - Preserve working demo controls, setup copy actions, pricing, privacy copy,
   guide routes, legal pages, and the existing free/Pro distinction.
+- Label the interactive panel as an illustration at first sight. Keep the real
+  vanilla Zustand sample one click from the hero, and scope product claims to
+  registered stores and captured updates.
 
 ## CTA voice
 
